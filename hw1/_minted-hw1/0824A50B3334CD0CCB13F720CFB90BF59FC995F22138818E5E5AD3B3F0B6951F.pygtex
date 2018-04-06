@@ -1,0 +1,117 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{import} \PYG{n+nn}{javax.print.DocFlavor.BYTE\PYGZus{}ARRAY}
+
+\PYG{k}{import} \PYG{n+nn}{scala.annotation.tailrec}
+
+\PYG{k}{object} \PYG{n+nc}{SelectionSort} \PYG{o}{\PYGZob{}}
+
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Calculate the minimum}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{indexOfMin}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{start}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])(}\PYG{k}{implicit} \PYG{n}{odr}\PYG{k}{:} \PYG{k+kt}{scala.math.Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Int} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{var} \PYG{n}{min\PYGZus{}idx} \PYG{k}{=} \PYG{n}{start}
+    \PYG{k}{var} \PYG{n}{i} \PYG{k}{=} \PYG{n}{start} \PYG{o}{+} \PYG{l+m+mi}{1}
+    \PYG{k}{while}\PYG{o}{(}\PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{length}\PYG{o}{)\PYGZob{}}
+      \PYG{k}{if}\PYG{o}{(}\PYG{n}{odr}\PYG{o}{.}\PYG{n}{lt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{i}\PYG{o}{),}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{min\PYGZus{}idx}\PYG{o}{)))}
+        \PYG{n}{min\PYGZus{}idx} \PYG{k}{=} \PYG{n}{i}
+      \PYG{n}{i} \PYG{k}{=} \PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{n}{min\PYGZus{}idx}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{n+nd}{@inline}
+  \PYG{k}{def} \PYG{n}{swap}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{j}\PYG{k}{:}\PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{tmp} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)}
+    \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{j}\PYG{o}{)}
+    \PYG{n}{arr}\PYG{o}{(}\PYG{n}{j}\PYG{o}{)} \PYG{k}{=} \PYG{n}{tmp}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Implement selection sort algorithm}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{selectionSort}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])(}\PYG{k}{implicit} \PYG{n}{odr}\PYG{k}{:} \PYG{k+kt}{scala.math.Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{]} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{var} \PYG{n}{unsortedIdx} \PYG{k}{=} \PYG{l+m+mi}{0}\PYG{o}{;}
+    \PYG{k}{while}\PYG{o}{(}\PYG{n}{unsortedIdx} \PYG{o}{\PYGZlt{}} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{length}\PYG{o}{)\PYGZob{}}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{unsortedIdx}\PYG{o}{,} \PYG{n}{indexOfMin}\PYG{o}{(}\PYG{n}{unsortedIdx}\PYG{o}{,} \PYG{n}{arr}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{)}
+      \PYG{n}{unsortedIdx} \PYG{k}{=} \PYG{n}{unsortedIdx} \PYG{o}{+} \PYG{l+m+mi}{1}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{n}{arr}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Generate random list of integer}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{generateRandomCase}\PYG{o}{(}\PYG{n}{n}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{]} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{var} \PYG{n}{r} \PYG{k}{=} \PYG{k}{new} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{n}{n}\PYG{o}{)} \PYG{n}{map} \PYG{o}{\PYGZob{}}\PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{()\PYGZcb{}} \PYG{n}{toArray}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Simply sort the list}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{generateBestCase}\PYG{o}{(}\PYG{n}{n}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{]} \PYG{k}{=} \PYG{n}{generateRandomCase}\PYG{o}{(}\PYG{n}{n}\PYG{o}{).}\PYG{n}{sorted}
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Reverse the sorted list}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{generateWorstCase}\PYG{o}{(}\PYG{n}{n}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{]} \PYG{k}{=} \PYG{n}{generateRandomCase}\PYG{o}{(}\PYG{n}{n}\PYG{o}{).}\PYG{n}{sortWith}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{o}{\PYGZgt{}=} \PYG{k}{\PYGZus{}}\PYG{o}{)} \PYG{c+c1}{//sort in reverse order}
+
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Test case}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{main}\PYG{o}{(}\PYG{n}{args}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{String}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{bestCases} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{5} \PYG{n}{map} \PYG{o}{\PYGZob{}}\PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{generateBestCase}\PYG{o}{(}\PYG{l+m+mi}{10000}\PYG{o}{)\PYGZcb{}} \PYG{n}{toList}
+    \PYG{k}{val} \PYG{n}{worstCases} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{5} \PYG{n}{map} \PYG{o}{\PYGZob{}}\PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{generateWorstCase}\PYG{o}{(}\PYG{l+m+mi}{10000}\PYG{o}{)\PYGZcb{}} \PYG{n}{toList}
+
+    \PYG{c+c1}{// HotSpot VM warm up}
+    \PYG{c+c1}{// Since Java Virtual Machine implement JIT and HotSpot algorithm by default}
+    \PYG{c+c1}{// warm up a function will lead to its JIT}
+    \PYG{c+c1}{//(1 to 30).foreach(\PYGZus{} =\PYGZgt{} selectionSort(generateWorstCase(1000)))}
+
+
+    \PYG{c+c1}{// start calculation}
+   \PYG{c+cm}{/*}
+\PYG{c+cm}{    println(\PYGZdq{}Worst case:\PYGZdq{})}
+\PYG{c+cm}{    println(worstCases.head mkString \PYGZdq{} \PYGZdq{})}
+\PYG{c+cm}{    worstCases foreach \PYGZob{}Timer printsMillo selectionSort[Int](\PYGZus{})\PYGZcb{}}
+\PYG{c+cm}{    println(\PYGZdq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZdq{})}
+
+\PYG{c+cm}{    println(\PYGZdq{}Best case: \PYGZdq{})}
+\PYG{c+cm}{    println(bestCases.head mkString \PYGZdq{} \PYGZdq{})}
+\PYG{c+cm}{    bestCases foreach \PYGZob{}Timer printsMillo selectionSort[Int](\PYGZus{})\PYGZcb{}}
+\PYG{c+cm}{    */}
+    \PYG{c+c1}{// prepare dataset}
+    \PYG{k}{val} \PYG{n}{datasetBest} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{20}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{generateBestCase}\PYG{o}{(}\PYG{n}{i}\PYG{o}{))).}\PYG{n}{toList} \PYG{c+c1}{//force evaluation}
+    \PYG{c+c1}{//run multiple times}
+    \PYG{k}{val} \PYG{n}{tryTime} \PYG{k}{=} \PYG{l+m+mi}{5}
+    \PYG{k}{val} \PYG{n}{resultBest} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{n}{tryTime}\PYG{o}{).}\PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{n}{datasetBest} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{k}{case} \PYG{o}{(}\PYG{n}{num}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{])} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{num}\PYG{o}{,} \PYG{n+nc}{Timer}\PYG{o}{.}\PYG{n}{mkMilloTuple}\PYG{o}{(}\PYG{n}{selectionSort}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{)).}\PYG{n}{\PYGZus{}1}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}\PYGZcb{}.}\PYG{n}{reduce}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{n}{zip} \PYG{k}{\PYGZus{}} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{+} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{/} \PYG{n}{tryTime}\PYG{o}{))}
+
+    \PYG{k}{val} \PYG{n}{datasetWorst} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{20}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{generateWorstCase}\PYG{o}{(}\PYG{n}{i}\PYG{o}{))).}\PYG{n}{toList} \PYG{c+c1}{//force evaluation}
+    \PYG{k}{val} \PYG{n}{resultWorst} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{n}{tryTime}\PYG{o}{).}\PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{n}{datasetBest} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{k}{case} \PYG{o}{(}\PYG{n}{num}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{])} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{num}\PYG{o}{,} \PYG{n+nc}{Timer}\PYG{o}{.}\PYG{n}{mkMilloTuple}\PYG{o}{(}\PYG{n}{selectionSort}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{)).}\PYG{n}{\PYGZus{}1}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}\PYGZcb{}.}\PYG{n}{reduce}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{n}{zip} \PYG{k}{\PYGZus{}} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{+} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{/} \PYG{n}{tryTime}\PYG{o}{))}
+
+    \PYG{k}{val} \PYG{n}{datasetAvg} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{20}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{o}{).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{generateRandomCase}\PYG{o}{(}\PYG{n}{i}\PYG{o}{))).}\PYG{n}{toList} \PYG{c+c1}{//force evaluation}
+    \PYG{k}{val} \PYG{n}{resultAvg} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{n}{tryTime}\PYG{o}{).}\PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{n}{i} \PYG{k}{=\PYGZgt{}} \PYG{n}{datasetAvg} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{k}{case} \PYG{o}{(}\PYG{n}{num}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{])} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{num}\PYG{o}{,} \PYG{n+nc}{Timer}\PYG{o}{.}\PYG{n}{mkMilloTuple}\PYG{o}{(}\PYG{n}{selectionSort}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{)).}\PYG{n}{\PYGZus{}1}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}\PYGZcb{}.}\PYG{n}{reduce}\PYG{o}{(}\PYG{k}{\PYGZus{}} \PYG{n}{zip} \PYG{k}{\PYGZus{}} \PYG{n}{map} \PYG{o}{\PYGZob{}}
+      \PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{+} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{.}\PYG{n}{\PYGZus{}2}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}).}\PYG{n}{map}\PYG{o}{(}\PYG{n}{t} \PYG{k}{=\PYGZgt{}} \PYG{o}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}1}\PYG{o}{,} \PYG{n}{t}\PYG{o}{.}\PYG{n}{\PYGZus{}2} \PYG{o}{/} \PYG{n}{tryTime}\PYG{o}{))}
+    \PYG{c+c1}{//print the resulting tuples}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}\PYGZsh{} Statistics for (d)\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}\PYGZsh{} Best case\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{resultBest}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}\PYGZsh{} Worst case\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{resultWorst}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}\PYGZsh{} Average case\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{resultAvg}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

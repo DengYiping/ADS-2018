@@ -1,0 +1,1 @@
+scalac -classpath /Users/scott/Desktop/algo/hw2/MergeSortVariant/target/scala-2.12/classes -bootclasspath /Users/scott/.sbt/boot/scala-2.12.4/lib/scala-library.jar /Users/scott/Desktop/algo/hw2/MergeSortVariant/src/main/scala/MergeSortVariant.scala

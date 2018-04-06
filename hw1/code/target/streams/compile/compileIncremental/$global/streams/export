@@ -1,0 +1,1 @@
+scalac -classpath /Users/scott/Desktop/algo/hw1/code/target/scala-2.12/classes -bootclasspath /Users/scott/.sbt/boot/scala-2.12.4/lib/scala-library.jar /Users/scott/Desktop/algo/hw1/code/src/main/scala/Timer.scala /Users/scott/Desktop/algo/hw1/code/src/main/scala/TimesRepeat.scala /Users/scott/Desktop/algo/hw1/code/src/main/scala/SelectionSort.scala

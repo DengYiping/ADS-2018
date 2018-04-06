@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{deque}
+
+\PYG{k}{def} \PYG{n+nf}{find\PYGZus{}max\PYGZus{}length}\PYG{p}{(}\PYG{n}{words}\PYG{p}{):}
+    \PYG{n}{lens} \PYG{o}{=} \PYG{n+nb}{map}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{,} \PYG{n}{words}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{lens}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{find\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{word}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{):}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{idx} \PYG{o}{\PYGZgt{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{word}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} it is out of bound, count it as a very small number}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} return the ascii code}
+        \PYG{k}{return} \PYG{n+nb}{ord}\PYG{p}{(}\PYG{n}{word}\PYG{p}{[}\PYG{n}{idx}\PYG{p}{])}
+
+\PYG{k}{def} \PYG{n+nf}{pass\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{words}\PYG{p}{,} \PYG{n}{buckets}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} insert into buckets and pop them out again}
+    \PYG{k}{for} \PYG{n}{word} \PYG{o+ow}{in} \PYG{n}{words}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} First in first out}
+        \PYG{n}{buckets}\PYG{p}{[}\PYG{n}{find\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{word}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)]}\PYG{o}{.}\PYG{n}{appendleft}\PYG{p}{(}\PYG{n}{word}\PYG{p}{)}
+    \PYG{n}{res} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{c+c1}{\PYGZsh{} restore the array}
+    \PYG{k}{for} \PYG{n}{bucket} \PYG{o+ow}{in} \PYG{n}{buckets}\PYG{p}{:}
+        \PYG{k}{while} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{bucket}\PYG{p}{):}
+            \PYG{n}{res}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{bucket}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{())}
+    \PYG{k}{return} \PYG{n}{res}
+
+
+\PYG{k}{def} \PYG{n+nf}{radix}\PYG{p}{(}\PYG{n}{words}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} make the buckets}
+    \PYG{n}{buckets} \PYG{o}{=} \PYG{p}{[}\PYG{n}{deque}\PYG{p}{()} \PYG{k}{for} \PYG{n}{\PYGZus{}} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{256}\PYG{p}{)]}
+    \PYG{n}{max\PYGZus{}len} \PYG{o}{=} \PYG{n}{find\PYGZus{}max\PYGZus{}length}\PYG{p}{(}\PYG{n}{words}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{idx} \PYG{o+ow}{in} \PYG{n+nb}{reversed}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{max\PYGZus{}len}\PYG{p}{)):}
+        \PYG{n}{words} \PYG{o}{=} \PYG{n}{pass\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{words}\PYG{p}{,} \PYG{n}{buckets}\PYG{p}{,} \PYG{n}{idx}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{words}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} test case}
+    \PYG{n}{words} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}abp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}adp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}awewwss\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}aaasdfwe\PYGZdq{}}\PYG{p}{]}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}before: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{words}\PYG{p}{))}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}after: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{radix}\PYG{p}{(}\PYG{n}{words}\PYG{p}{)))}
+\end{Verbatim}

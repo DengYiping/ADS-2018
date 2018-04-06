@@ -1,0 +1,72 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{time} \PYG{k+kn}{import} \PYG{n}{time}
+\PYG{k+kn}{import} \PYG{n+nn}{matrix\PYGZus{}fib}
+\PYG{k+kn}{import} \PYG{n+nn}{formula\PYGZus{}fib}
+\PYG{k+kn}{import} \PYG{n+nn}{bottom\PYGZus{}up\PYGZus{}fib}
+\PYG{k+kn}{import} \PYG{n+nn}{recursive\PYGZus{}fib}
+
+\PYG{k}{def} \PYG{n+nf}{timer}\PYG{p}{(}\PYG{n}{f}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} a functional wrapper}
+    \PYG{c+c1}{\PYGZsh{} will return the result in microsec}
+    \PYG{k}{def} \PYG{n+nf}{wrapper}\PYG{p}{(}\PYG{o}{*}\PYG{n}{arg}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kw}\PYG{p}{):}
+        \PYG{n}{t1} \PYG{o}{=} \PYG{n}{time}\PYG{p}{()}
+        \PYG{n}{res} \PYG{o}{=} \PYG{n}{f}\PYG{p}{(}\PYG{o}{*}\PYG{n}{arg}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kw}\PYG{p}{)}
+        \PYG{n}{t2} \PYG{o}{=} \PYG{n}{time}\PYG{p}{()}
+        \PYG{k}{return} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb}{round}\PYG{p}{((}\PYG{n}{t2} \PYG{o}{\PYGZhy{}} \PYG{n}{t1}\PYG{p}{)} \PYG{o}{*} \PYG{l+m+mi}{1000000000}\PYG{p}{)),} \PYG{n}{res}
+    \PYG{k}{return} \PYG{n}{wrapper}
+
+\PYG{k}{def} \PYG{n+nf}{avgTimer}\PYG{p}{(}\PYG{n}{f}\PYG{p}{):}
+    \PYG{n}{timer\PYGZus{}f} \PYG{o}{=} \PYG{n}{timer}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+    \PYG{k}{def} \PYG{n+nf}{wrapper}\PYG{p}{(}\PYG{o}{*}\PYG{n}{arg}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kw}\PYG{p}{):}
+        \PYG{n}{s} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{k}{for} \PYG{n}{\PYGZus{}} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{):}
+            \PYG{n}{t}\PYG{p}{,} \PYG{n}{\PYGZus{}} \PYG{o}{=} \PYG{n}{timer\PYGZus{}f}\PYG{p}{(}\PYG{o}{*}\PYG{n}{arg}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kw}\PYG{p}{)}
+            \PYG{n}{s} \PYG{o}{+=} \PYG{n}{t}
+        \PYG{k}{return} \PYG{n}{s} \PYG{o}{//} \PYG{l+m+mi}{5}
+    \PYG{k}{return} \PYG{n}{wrapper}
+
+\PYG{k}{def} \PYG{n+nf}{feeder}\PYG{p}{(}\PYG{n}{f}\PYG{p}{):}
+    \PYG{n}{f\PYGZus{}wrapped} \PYG{o}{=} \PYG{n}{avgTimer}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+    \PYG{n}{t1} \PYG{o}{=} \PYG{n}{time}\PYG{p}{()}
+    \PYG{n}{n} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{res} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{while} \PYG{p}{(}\PYG{n}{time}\PYG{p}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{t1}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mf}{5.0}\PYG{p}{:}
+        \PYG{n}{n} \PYG{o}{+=} \PYG{l+m+mi}{1}
+        \PYG{n}{t} \PYG{o}{=} \PYG{n}{f\PYGZus{}wrapped}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+        \PYG{n}{res}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{res}
+
+\PYG{k}{def} \PYG{n+nf}{calculate}\PYG{p}{():}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Quick check of correctness of 4 approaches}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} recursive\PYGZus{}fib.fib(20) == bottom\PYGZus{}up\PYGZus{}fib.fib(20)}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} formula\PYGZus{}fib.fib(20) == recursive\PYGZus{}fib.fib(20)}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} matrix\PYGZus{}fib.fib(20) == formula\PYGZus{}fib.fib(20)}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{recursive\PYGZus{}times} \PYG{o}{=} \PYG{n}{feeder}\PYG{p}{(}\PYG{n}{recursive\PYGZus{}fib}\PYG{o}{.}\PYG{n}{fib}\PYG{p}{)}
+    \PYG{n}{bottom\PYGZus{}up\PYGZus{}times} \PYG{o}{=} \PYG{n}{feeder}\PYG{p}{(}\PYG{n}{bottom\PYGZus{}up\PYGZus{}fib}\PYG{o}{.}\PYG{n}{fib}\PYG{p}{)}
+    \PYG{n}{formula\PYGZus{}times} \PYG{o}{=} \PYG{n}{feeder}\PYG{p}{(}\PYG{n}{formula\PYGZus{}fib}\PYG{o}{.}\PYG{n}{fib}\PYG{p}{)}
+    \PYG{n}{matrix\PYGZus{}times} \PYG{o}{=} \PYG{n}{feeder}\PYG{p}{(}\PYG{n}{matrix\PYGZus{}fib}\PYG{o}{.}\PYG{n}{fib}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{recursive\PYGZus{}times}\PYG{p}{,} \PYG{n}{bottom\PYGZus{}up\PYGZus{}times}\PYG{p}{,} \PYG{n}{formula\PYGZus{}times}\PYG{p}{,} \PYG{n}{matrix\PYGZus{}times}
+
+\PYG{n}{sampleNum} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{,} \PYG{l+m+mi}{400}\PYG{p}{,} \PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+m+mi}{1600}\PYG{p}{,} \PYG{l+m+mi}{3200}\PYG{p}{,} \PYG{l+m+mi}{6400}\PYG{p}{,} \PYG{l+m+mi}{128000}\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{def} \PYG{n+nf}{createTable}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{):}
+    \PYG{n}{count} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{t} \PYG{o+ow}{in} \PYG{n}{lst}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{count} \PYG{o+ow}{in} \PYG{n}{sampleNum}\PYG{p}{:}
+            \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}n = \PYGZob{}\PYGZcb{}, t = \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{count}\PYG{p}{,} \PYG{n}{t}\PYG{p}{))}
+        \PYG{n}{count} \PYG{o}{+=} \PYG{l+m+mi}{1}
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{r\PYGZus{}times}\PYG{p}{,} \PYG{n}{b\PYGZus{}times}\PYG{p}{,} \PYG{n}{f\PYGZus{}times}\PYG{p}{,} \PYG{n}{m\PYGZus{}times} \PYG{o}{=} \PYG{n}{calculate}\PYG{p}{()}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}recursive:\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{createTable}\PYG{p}{(}\PYG{n}{r\PYGZus{}times}\PYG{p}{)}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}bottom up:\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{createTable}\PYG{p}{(}\PYG{n}{b\PYGZus{}times}\PYG{p}{)}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}formula:\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{createTable}\PYG{p}{(}\PYG{n}{f\PYGZus{}times}\PYG{p}{)}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}m\PYGZus{}times:\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{createTable}\PYG{p}{(}\PYG{n}{m\PYGZus{}times}\PYG{p}{)}
+\end{Verbatim}

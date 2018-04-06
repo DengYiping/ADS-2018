@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{fib}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Return the nth Fibonacci number}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} fib(2)}
+\PYG{l+s+sd}{    1}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} fib(3)}
+\PYG{l+s+sd}{    2}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} fib(4)}
+\PYG{l+s+sd}{    3}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} fib(5)}
+\PYG{l+s+sd}{    5}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mi}{1}
+    \PYG{n}{n\PYGZus{}1} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{n\PYGZus{}2} \PYG{o}{=} \PYG{l+m+mi}{1}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{n}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} execute n \PYGZhy{} 1 times}
+        \PYG{n}{n\PYGZus{}2} \PYG{o}{=} \PYG{n}{n\PYGZus{}1} \PYG{o}{+} \PYG{n}{n\PYGZus{}2}
+        \PYG{n}{n\PYGZus{}1} \PYG{o}{=} \PYG{n}{n\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{n\PYGZus{}1}
+    \PYG{k}{return} \PYG{n}{n\PYGZus{}2}
+\end{Verbatim}

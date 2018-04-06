@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{Matrix}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{n11}\PYG{p}{,} \PYG{n}{n12}\PYG{p}{,} \PYG{n}{n21}\PYG{p}{,} \PYG{n}{n22}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n11} \PYG{o}{=} \PYG{n}{n11}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n12} \PYG{o}{=} \PYG{n}{n12}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n21} \PYG{o}{=} \PYG{n}{n21}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n22} \PYG{o}{=} \PYG{n}{n22}
+    \PYG{k}{def} \PYG{n+nf}{mul}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{other}\PYG{p}{):}
+        \PYG{n}{n11} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n11} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n11} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n12} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n21}
+        \PYG{n}{n12} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n11} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n12} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n12} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n22}
+        \PYG{n}{n21} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n21} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n11} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n22} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n21}
+        \PYG{n}{n22} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n21} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n12} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n22} \PYG{o}{*} \PYG{n}{other}\PYG{o}{.}\PYG{n}{n22}
+        \PYG{k}{return} \PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{n11}\PYG{p}{,} \PYG{n}{n12}\PYG{p}{,} \PYG{n}{n21}\PYG{p}{,} \PYG{n}{n22}\PYG{p}{)}
+    \PYG{k}{def} \PYG{n+nf}{p}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZcb{} \PYGZob{}\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZob{}\PYGZcb{} \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n11}\PYG{p}{,}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n12}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n21}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n22}\PYG{p}{))}
+        \PYG{k}{return}
+
+\PYG{n}{base} \PYG{o}{=} \PYG{n}{Matrix}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{k}{def} \PYG{n+nf}{fib\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{base}
+    \PYG{n}{m\PYGZus{}half} \PYG{o}{=} \PYG{n}{fib\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{n} \PYG{o}{//} \PYG{l+m+mi}{2}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} half value}
+    \PYG{n}{res} \PYG{o}{=} \PYG{n}{m\PYGZus{}half}\PYG{o}{.}\PYG{n}{mul}\PYG{p}{(}\PYG{n}{m\PYGZus{}half}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{2} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} deal with reminder}
+        \PYG{n}{res} \PYG{o}{=} \PYG{n}{res}\PYG{o}{.}\PYG{n}{mul}\PYG{p}{(}\PYG{n}{base}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{res}
+
+\PYG{k}{def} \PYG{n+nf}{fib}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+    \PYG{k}{return} \PYG{n}{fib\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}\PYG{o}{.}\PYG{n}{n21}
+\end{Verbatim}

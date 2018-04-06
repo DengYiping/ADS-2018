@@ -1,0 +1,15 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mMergeSortVariantTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mA sorting algorithm[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mMergeSortVariantTest *** ABORTED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  java.lang.StackOverflowError:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering$IntOrdering.compare(Ordering.scala:252)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering$IntOrdering.compare$(Ordering.scala:252)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering$Int$.compare(Ordering.scala:254)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering$Int$.compare(Ordering.scala:254)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering.lt(Ordering.scala:94)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering.lt$(Ordering.scala:94)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.math.Ordering$Int$.lt(Ordering.scala:254)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at MergeSortVariant$.merge(MergeSortVariant.scala:13)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at MergeSortVariant$.merge(MergeSortVariant.scala:14)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at MergeSortVariant$.merge(MergeSortVariant.scala:14)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m

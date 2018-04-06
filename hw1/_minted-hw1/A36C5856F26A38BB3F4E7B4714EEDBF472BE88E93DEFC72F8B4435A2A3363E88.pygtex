@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{import} \PYG{n+nn}{org.scalatest.FlatSpec}
+
+\PYG{k}{class} \PYG{n+nc}{SelectionSortTest} \PYG{k}{extends} \PYG{n+nc}{FlatSpec}\PYG{o}{\PYGZob{}}
+  \PYG{c+c1}{// Unit Test for selection sort algorithm}
+  \PYG{l+s}{\PYGZdq{} A index of Minimum function\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}return the index of minimum\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{k}{new} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{]} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{100000} \PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{()} \PYG{o}{\PYGZcb{}} \PYG{n}{toArray}
+    \PYG{k}{val} \PYG{n}{idx} \PYG{k}{=} \PYG{n+nc}{Timer} \PYG{n}{printsMillo} \PYG{n+nc}{SelectionSort}\PYG{o}{.}\PYG{n}{indexOfMin}\PYG{o}{(}\PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{(}\PYG{n}{idx}\PYG{o}{)} \PYG{o}{==} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{min}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+  \PYG{l+s}{\PYGZdq{} A selection sort algorithm\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}sort random list\PYGZdq{}} \PYG{n}{in}\PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{k}{new} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{]} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{100000} \PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{()} \PYG{o}{\PYGZcb{}} \PYG{n}{toArray}
+    \PYG{k}{val} \PYG{n}{selectionSorted} \PYG{k}{=} \PYG{n+nc}{SelectionSort}\PYG{o}{.}\PYG{n}{selectionSort}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{)(}\PYG{n}{scala}\PYG{o}{.}\PYG{n}{math}\PYG{o}{.}\PYG{n+nc}{Ordering}\PYG{o}{[}\PYG{k+kt}{Int}\PYG{o}{])}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{selectionSorted}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{sorted}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

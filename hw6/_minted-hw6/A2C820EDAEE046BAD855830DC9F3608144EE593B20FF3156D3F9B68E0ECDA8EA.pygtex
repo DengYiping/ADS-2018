@@ -1,0 +1,54 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{insertion\PYGZus{}sort}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Implementation of insertion sort in python}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} insertion\PYGZus{}sort([4, 3, 2 ,1])}
+\PYG{l+s+sd}{    [1, 2, 3, 4]}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}calling the insertion sort on \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{))}
+    \PYG{k}{for} \PYG{n}{idx} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{)):}
+        \PYG{n}{val} \PYG{o}{=} \PYG{n}{lst}\PYG{p}{[}\PYG{n}{idx}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} current value}
+        \PYG{n}{pos} \PYG{o}{=} \PYG{n}{idx} \PYG{c+c1}{\PYGZsh{} current position}
+
+        \PYG{c+c1}{\PYGZsh{} move the element}
+        \PYG{k}{while} \PYG{n}{pos} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{o+ow}{and} \PYG{n}{lst}\PYG{p}{[}\PYG{n}{pos} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{n}{val}\PYG{p}{:}
+            \PYG{n}{lst}\PYG{p}{[}\PYG{n}{pos}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lst}\PYG{p}{[}\PYG{n}{pos} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{pos} \PYG{o}{=} \PYG{n}{pos} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+
+        \PYG{n}{lst}\PYG{p}{[}\PYG{n}{pos}\PYG{p}{]} \PYG{o}{=} \PYG{n}{val}
+
+    \PYG{k}{return} \PYG{n}{lst}
+
+\PYG{k}{def} \PYG{n+nf}{bucket\PYGZus{}sort}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{):}
+    \PYG{n}{maximum} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+    \PYG{n}{minimum} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+    \PYG{n}{num\PYGZus{}bucket} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{)}
+    \PYG{n}{step} \PYG{o}{=} \PYG{p}{(}\PYG{n}{maximum} \PYG{o}{\PYGZhy{}} \PYG{n}{minimum}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{num\PYGZus{}bucket}\PYG{p}{)}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}number of bucket: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{num\PYGZus{}bucket}\PYG{p}{))}
+    \PYG{n}{buckets} \PYG{o}{=} \PYG{p}{[[]} \PYG{k}{for} \PYG{n}{\PYGZus{}} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{num\PYGZus{}bucket}\PYG{p}{)]}
+    \PYG{k}{print}\PYG{p}{(}\PYG{n}{buckets}\PYG{p}{)}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}build empty buckets\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{find\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{i}\PYG{p}{):}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}find bucket for \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{i}\PYG{p}{))}
+        \PYG{k}{return} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{i} \PYG{o}{/} \PYG{n}{step}\PYG{p}{)}
+
+    \PYG{n}{res} \PYG{o}{=} \PYG{p}{[]}
+
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}start to put in buckets\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{entry} \PYG{o+ow}{in} \PYG{n}{arr}\PYG{p}{:}
+        \PYG{n}{b} \PYG{o}{=} \PYG{n}{find\PYGZus{}bucket}\PYG{p}{(}\PYG{n}{entry}\PYG{p}{)}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}put in bucket \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{b}\PYG{p}{))}
+        \PYG{n}{buckets}\PYG{p}{[}\PYG{n}{b}\PYG{p}{]}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{entry}\PYG{p}{)}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}now in buckets we have \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{buckets}\PYG{p}{))}
+
+    \PYG{k}{for} \PYG{n}{bucket} \PYG{o+ow}{in} \PYG{n}{buckets}\PYG{p}{:}
+        \PYG{n}{n\PYGZus{}bkt} \PYG{o}{=} \PYG{n}{insertion\PYGZus{}sort}\PYG{p}{(}\PYG{n}{bucket}\PYG{p}{)}
+        \PYG{n}{res} \PYG{o}{=} \PYG{n}{res} \PYG{o}{+} \PYG{n}{n\PYGZus{}bkt}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}building results by adding \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{n\PYGZus{}bkt}\PYG{p}{))}
+
+    \PYG{k}{return} \PYG{n}{res}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{arr} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{,} \PYG{l+m+mf}{0.6}\PYG{p}{,} \PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{l+m+mf}{0.6}\PYG{p}{,} \PYG{l+m+mf}{0.2}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{]}
+    \PYG{k}{print}\PYG{p}{(}\PYG{n}{bucket\PYGZus{}sort}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{))}
+\end{Verbatim}

@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{mathtools}
+\providecommand{\ceilfunc}[1]{\left \lceil #1 \right \rceil }
+\providecommand{\floorfunc}[1]{\left \lfloor #1 \right \rfloor }
+\graphicspath{ {img/} }
+\usepackage{titlesec}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%basic page layout
+
+%draw finite state machine
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\newcommand{\hwnumber}{5}
+\newcommand{\Lcvy}{\mathcal{L}}
+%header and footer settings
+\lhead{Algorithms and Data Structure \hwnumber}
+\chead{Yiping Deng}
+\rhead{\today}
+
+\titlelabel{\thetitle\enspace}
+
+\begin{document}
+\title{Algorithms and Data Structure \hwnumber}
+\author{Yiping Deng}
+\maketitle
+\thispagestyle{fancy}
+\section*{Problem 1}
+\subsection*{a)}
+File 1: QuickSortVariant.scala
+\inputminted{Scala}{QuickSort/src/main/scala/QuickSortVariant.scala}
+Test case \\
+File 2: QuickSortTest.scala
+\inputminted{Scala}{QuickSort/src/test/scala/QuickSortTest.scala}
+\subsection*{b)}
+\textbf{Best Case:}
+Best case will lead to equal partition in all recursive calls.
+Every recursions will make 3 recursive calls on a $n/3$ data
+set.
+Partition iterates through the element once,
+so it's complexity is $O(n)$.
+Thus we can write the recurrences, and solve it. \\
+\begin{align*}
+    T(n) &= 3 T(n) + O(n) \\
+    T(n) &= O(n \log(n))
+\end{align*}
+Hence, the best case is $O(n \log(n))$ \\
+\textbf{Worst Case:}
+Worst case will lead to partition that place the two
+pivots at the beginning and at the end.
+The first partition contains $0$ element, and the second
+partition contains $n - 2$ elements, and the third
+partition contains $0$ elements.
+Essentially, it just put the two pivot at the right position
+on every recursive call, nothing else.
+Partition iterates through the element once,
+so it's complexity is $O(n)$.
+Thus, we can write the recurrence as following and solve it
+\begin{align*}
+    T(n) &= T(n - 2) + O(n) \\
+    T(n) &= O(n^2)
+\end{align*}
+Hence, the worst case is $O(n^2)$.
+\subsection*{c)}
+Let's modify our partition a bit, and change nothing else.
+
+File 1: QuickSortVariantRandom.scala
+\inputminted{Scala}{QuickSort/src/main/scala/QuickSortVariantRandom.scala}
+
+\section*{Problem 2}
+\subsection*{a)}
+\textbf{Proof:} We start by simpify the LHS
+\begin{align*}
+    LHS &\leq \sum_{k = 1}^{n - 1} k \lg(k) \leq
+    \sum_{k = 1}^{\floorfunc{n / 2}} k \lg(k) +
+    \sum_{k = \floorfunc{n / 2} + 1}^{n - 1} k \lg(k) \\
+    &\leq lg(\floorfunc{n / 2}) \sum_{k = 1}^{\floorfunc{n / 2}} k  +
+    \lg(n) \sum_{k = \floorfunc{n / 2} + 1}^{n - 1} k \lg(k) \\
+    &\leq (\lg(n) - 1) \sum_{k = 1}^{\floorfunc{n / 2}} k  +
+    \lg(n) \sum_{k = \floorfunc{n / 2} + 1}^{n - 1} k \lg(k) \\
+    &\leq \lg(n) \sum_{k = 1}^{n - 1} k -  \sum_{k = 1}^{\floorfunc{n / 2}} k
+\end{align*}
+\textbf{Lemma:} $\sum_{k = 1}^{n} = \frac{n(n + 1)}{2} $ \\
+Using induction: \\
+Basis: $ n = 1 $
+\begin{align*}
+    \sum_{k = 1}^{n} k  &= 1 = \frac{1 \cdot (1 + 1)}{2} = 1 \\
+\end{align*}
+Inductive step: Assume it holds for $n$
+\begin{align*}
+    \sum_{k = 1}^{n + 1} k &= \sum_{k = 1}^{n} k + n  + 1\\
+    &= \frac{n(n+1)}{2} + \frac{2n + 2}{2} \\
+    &= \frac{n^2 + 3n + 2}{2} \\
+    &= \frac{(n + 1)(n + 2)}{2}
+\end{align*}
+Using this to simplify the formula, we have
+\begin{align*}
+    LHS &\leq \lg(n) \frac{n(n - 1)}{2} - \frac{n/2 \cdot (n/2 + 1)}{2} \\
+    &= \lg(n) \frac{n^2 / 2}{2} - \frac{n}{2} \lg(n)
+    -\frac{n^2}{8} - \frac{n}{4} \lg(n) \\
+    &\leq \frac{1}{2} n^2 \lg(n) - \frac{1}{8} n^2
+\end{align*}
+\subsection*{b)}
+\textbf{Assumption:} Uniform distribution of permutation. \\
+\textbf{Proof:}
+define random variable
+\begin{align*}
+    X_k :=
+    \begin{cases}
+        1 & \text{if partition at index k}\\
+        0 & \text{if not}\\
+    \end{cases}
+\end{align*}
+Due to uniform distribution, we have
+$$ E(X_k) = 1/n $$
+Thus,
+\begin{align*}
+    T(n) :=
+    \begin{cases}
+        T(0) + T(n - 1) + \Theta(n) & \text{if partition at index 0}\\
+        T(1) + T(n - 2) + \Theta(n) & \text{if partition at index 1}\\
+        &...\\
+        &...\\
+        T(n - 1) + T(0) + \Theta(n) & \text{if partition at index } n - 1\\
+    \end{cases}
+\end{align*}
+Taking expectation on both side and use linearity of expectation. \\
+Also merge two similar sum. Merge the case $k = 0, k = 1$
+into the term $\Theta(n)$
+\begin{align*}
+    E(T(n)) &=
+    E(\sum_{k = 0}^{n - 1} X_k (T(k) + T(n - k - 1)) + ) \\
+    &= 1/n \sum_{k = 0}^{n - 1} E(T(k)) +
+    1/n  \sum_{k = 0}^{n - 1} E(T(n - k - 1))
+    + 1/n  \sum_{k = 0}^{n - 1} \Theta(n) \\
+    &= \frac{2}{n} \sum_{k = 1}^{n - 1} E(T(k)) + \Theta(n)
+\end{align*}
+Base case: $k = 2$, it is quite obvious since $c$ can be arbitrary big. \\
+Inductive case:(strong induction) \\
+Assume the argument holds for any $n \leq m -1 $
+\begin{align*}
+    E(T(m)) &\leq \frac{2}{n} \sum_{k = 2}{m - 1} c \cdot k \lg(k) + \Theta(n)\\
+    &\leq \frac{2c}{n} (\frac{1}{2} n^2 \lg(n) - \frac{1}{8} n^2)\\
+    &\leq c n \lg(n) - \frac{c n}{4} + \Theta(n) \\
+    &\leq c n \lg(n) \text{ for arbitrary c}
+\end{align*}
+\section*{Problem 3:}
+\textbf{Part 1:} Upper bound.
+\begin{align*}
+    n! &\leq n^n \implies \\
+    \lg(n!) &\leq \lg(n^n) = n \lg(n) \\
+\end{align*}
+\textbf{Part 2:} Lower bound.
+\begin{align*}
+    (n!)^2 &\geq n^n \implies \\
+    \lg((n!)^2) &= 2 \lg(n!) \geq n \lg(n) \implies \\
+    \lg(n!) &\geq \frac{1}{2} n \lg(n)
+\end{align*}
+This directly implies that
+$$ \lg(n!) = \Theta(n \lg(n)) $$
+\end{document}

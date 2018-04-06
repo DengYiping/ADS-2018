@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZsh{} sbt}
+    \PYGZgt{} compile
+    \PYGZgt{} \PYG{n+nb}{test}
+\end{Verbatim}

@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{object} \PYG{n+nc}{Timer} \PYG{o}{\PYGZob{}}
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  Generic timer for scala code block}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{printsNano}\PYG{o}{[}\PYG{k+kt}{R}\PYG{o}{](}\PYG{n}{codeBlock}\PYG{k}{:} \PYG{o}{=\PYGZgt{}} \PYG{n}{R}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{R} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//measure the time}
+    \PYG{k}{val} \PYG{n}{t0} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{nanoTime}\PYG{o}{()}
+    \PYG{c+c1}{//execute the code block}
+    \PYG{k}{val} \PYG{n}{result} \PYG{k}{=} \PYG{n}{codeBlock} \PYG{c+c1}{//call by name}
+    \PYG{k}{val} \PYG{n}{t1} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{nanoTime}\PYG{o}{()}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{s\PYGZdq{}Elapsed time: }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n}{t1} \PYG{o}{\PYGZhy{}} \PYG{n}{t0}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s}{ ms\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{result}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{printsMillo}\PYG{o}{[}\PYG{k+kt}{R}\PYG{o}{](}\PYG{n}{codeBlock}\PYG{k}{:} \PYG{o}{=\PYGZgt{}} \PYG{n}{R}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{R} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//measure the time}
+    \PYG{k}{val} \PYG{n}{t0} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{currentTimeMillis}\PYG{o}{()}
+    \PYG{c+c1}{//execute the code block}
+    \PYG{k}{val} \PYG{n}{result} \PYG{k}{=} \PYG{n}{codeBlock} \PYG{c+c1}{//call by name}
+    \PYG{k}{val} \PYG{n}{t1} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{currentTimeMillis}\PYG{o}{()}
+    \PYG{n}{println}\PYG{o}{(}\PYG{l+s}{s\PYGZdq{}Elapsed time: }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n}{t1} \PYG{o}{\PYGZhy{}} \PYG{n}{t0}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s}{ ms\PYGZdq{}}\PYG{o}{)}
+    \PYG{n}{result}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{c+cm}{/*}
+\PYG{c+cm}{  timer that returns}
+\PYG{c+cm}{   */}
+  \PYG{k}{def} \PYG{n}{mkNanoTuple}\PYG{o}{[}\PYG{k+kt}{R}\PYG{o}{](}\PYG{n}{codeBlock}\PYG{k}{:} \PYG{o}{=\PYGZgt{}} \PYG{n}{R}\PYG{o}{)}\PYG{k}{:} \PYG{o}{(}\PYG{k+kt}{Long}\PYG{o}{,} \PYG{k+kt}{R}\PYG{o}{)} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//measure time}
+    \PYG{k}{val} \PYG{n}{t0} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{nanoTime}\PYG{o}{()}
+
+    \PYG{c+c1}{//call by name}
+    \PYG{k}{val} \PYG{n}{result} \PYG{k}{=} \PYG{n}{codeBlock}
+
+    \PYG{k}{val} \PYG{n}{t1} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{nanoTime}\PYG{o}{()}
+    \PYG{o}{(}\PYG{n}{t1} \PYG{o}{\PYGZhy{}} \PYG{n}{t0}\PYG{o}{,} \PYG{n}{result}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{mkMilloTuple}\PYG{o}{[}\PYG{k+kt}{R}\PYG{o}{](}\PYG{n}{codeBlock}\PYG{k}{:} \PYG{o}{=\PYGZgt{}} \PYG{n}{R}\PYG{o}{)}\PYG{k}{:} \PYG{o}{(}\PYG{k+kt}{Long}\PYG{o}{,} \PYG{k+kt}{R}\PYG{o}{)} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//measure time}
+    \PYG{k}{val} \PYG{n}{t0} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{currentTimeMillis}\PYG{o}{()}
+
+    \PYG{c+c1}{//call by name}
+    \PYG{k}{val} \PYG{n}{result} \PYG{k}{=} \PYG{n}{codeBlock}
+
+    \PYG{k}{val} \PYG{n}{t1} \PYG{k}{=} \PYG{n+nc}{System}\PYG{o}{.}\PYG{n}{currentTimeMillis}\PYG{o}{()}
+    \PYG{o}{(}\PYG{n}{t1} \PYG{o}{\PYGZhy{}} \PYG{n}{t0}\PYG{o}{,} \PYG{n}{result}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

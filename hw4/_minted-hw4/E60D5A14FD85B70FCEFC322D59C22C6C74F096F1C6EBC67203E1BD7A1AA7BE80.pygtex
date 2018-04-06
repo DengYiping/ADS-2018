@@ -1,0 +1,46 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{object} \PYG{n+nc}{HeapSort} \PYG{o}{\PYGZob{}}
+  \PYG{k}{def} \PYG{n}{indexLeft}\PYG{o}{(}\PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{i}\PYG{o}{)} \PYG{o}{+} \PYG{l+m+mi}{1} \PYG{c+c1}{// zero indexed system}
+  \PYG{k}{def} \PYG{n}{indexRight}\PYG{o}{(}\PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)} \PYG{k}{=} \PYG{n}{indexLeft}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)} \PYG{o}{+} \PYG{l+m+mi}{1}
+  \PYG{k}{def} \PYG{n}{indexParent}\PYG{o}{(}\PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)} \PYG{k}{=} \PYG{o}{(}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{/} \PYG{l+m+mi}{2}
+
+  \PYG{k}{def} \PYG{n}{swap}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{a}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{j}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//generic swap function for array}
+    \PYG{k}{val} \PYG{n}{tmp} \PYG{k}{=} \PYG{n}{a}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)}
+    \PYG{n}{a}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)} \PYG{k}{=} \PYG{n}{a}\PYG{o}{(}\PYG{n}{j}\PYG{o}{)}
+    \PYG{n}{a}\PYG{o}{(}\PYG{n}{j}\PYG{o}{)} \PYG{k}{=} \PYG{n}{tmp}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{maxHeapify}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{a}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{i}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{size}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//heapify at index i}
+    \PYG{k}{val} \PYG{n}{idxLeft} \PYG{k}{=} \PYG{n}{indexLeft}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)}
+    \PYG{k}{val} \PYG{n}{idxRight} \PYG{k}{=} \PYG{n}{indexRight}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)}
+
+    \PYG{c+c1}{//find the largest in the small tree branch}
+    \PYG{k}{var} \PYG{n}{largest} \PYG{k}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+    \PYG{n}{largest} \PYG{k}{=} \PYG{k}{if}\PYG{o}{(}\PYG{n}{idxLeft} \PYG{o}{\PYGZlt{}} \PYG{n}{size} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{a}\PYG{o}{(}\PYG{n}{idxLeft}\PYG{o}{),} \PYG{n}{a}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)))} \PYG{n}{idxLeft} \PYG{k}{else} \PYG{n}{i}
+    \PYG{n}{largest} \PYG{k}{=} \PYG{k}{if}\PYG{o}{(}\PYG{n}{idxRight} \PYG{o}{\PYGZlt{}} \PYG{n}{size} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{a}\PYG{o}{(}\PYG{n}{idxRight}\PYG{o}{),} \PYG{n}{a}\PYG{o}{(}\PYG{n}{largest}\PYG{o}{)))} \PYG{n}{idxRight} \PYG{k}{else} \PYG{n}{largest}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{largest} \PYG{o}{!=} \PYG{n}{i}\PYG{o}{)\PYGZob{}}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{i}\PYG{o}{,} \PYG{n}{largest}\PYG{o}{)}
+      \PYG{n}{maxHeapify}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{largest}\PYG{o}{,} \PYG{n}{size}\PYG{o}{)}
+      \PYG{c+c1}{// let A[i] float down so that A[i] is always larger than its branches}
+    \PYG{o}{\PYGZcb{}}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{maxHeapBuild}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{a}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{size}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:} \PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{half} \PYG{k}{=} \PYG{n}{size} \PYG{o}{/} \PYG{l+m+mi}{2}
+    \PYG{k}{for}\PYG{o}{(} \PYG{n}{i} \PYG{k}{\PYGZlt{}\PYGZhy{}} \PYG{l+m+mi}{0} \PYG{n}{to} \PYG{n}{half}\PYG{o}{)\PYGZob{}}
+      \PYG{n}{maxHeapify}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{half} \PYG{o}{\PYGZhy{}} \PYG{n}{i}\PYG{o}{,} \PYG{n}{size}\PYG{o}{)} \PYG{c+c1}{//in a backward order}
+    \PYG{o}{\PYGZcb{}}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{heapSort}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{a}\PYG{k}{:}\PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:}\PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{n}{maxHeapBuild}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{a}\PYG{o}{.}\PYG{n}{length}\PYG{o}{)} \PYG{c+c1}{//build a maxheap}
+    \PYG{k}{for}\PYG{o}{(}\PYG{n}{i} \PYG{k}{\PYGZlt{}\PYGZhy{}} \PYG{o}{(}\PYG{l+m+mi}{0} \PYG{n}{until} \PYG{n}{a}\PYG{o}{.}\PYG{n}{length}\PYG{o}{).}\PYG{n}{reverse}\PYG{o}{)\PYGZob{}}
+      \PYG{c+c1}{//in a reverse order sort it}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{i}\PYG{o}{)} \PYG{c+c1}{//put the last one at the back}
+      \PYG{n}{maxHeapify}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{i}\PYG{o}{)} \PYG{c+c1}{//the size is changing}
+    \PYG{o}{\PYGZcb{}}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

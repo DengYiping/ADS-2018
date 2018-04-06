@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{counting\PYGZus{}sort}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{,} \PYG{n}{maximum}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Implementing the counting sort algorithm}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{countings} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{p}{(}\PYG{n}{maximum} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} initiate a list with zeros}
+    \PYG{n}{res} \PYG{o}{=} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} result}
+    \PYG{k}{for} \PYG{n}{entry} \PYG{o+ow}{in} \PYG{n}{arr}\PYG{p}{:}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}counting of \PYGZob{}\PYGZcb{} is incremented\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{entry}\PYG{p}{))}
+        \PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{=} \PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{+} \PYG{l+m+mi}{1}
+        \PYG{c+c1}{\PYGZsh{} self increment}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}countings: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{countings}\PYG{p}{))}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}now we aggregate the countings\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{idx} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{countings}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{):}
+        \PYG{n}{countings}\PYG{p}{[}\PYG{n}{idx} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{countings}\PYG{p}{[}\PYG{n}{idx} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{countings}\PYG{p}{[}\PYG{n}{idx}\PYG{p}{]}
+        \PYG{c+c1}{\PYGZsh{} aggregate the countings}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}countings: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{countings}\PYG{p}{))}
+    \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}restore the result\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{entry} \PYG{o+ow}{in} \PYG{n}{arr}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} build the result}
+        \PYG{c+c1}{\PYGZsh{} print(\PYGZdq{}entry: \PYGZob{}\PYGZcb{}, count: \PYGZob{}\PYGZcb{}\PYGZdq{}.format(entry, countings[entry]))}
+        \PYG{n}{res}\PYG{p}{[}\PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{entry}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}put \PYGZob{}\PYGZcb{} at index \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{entry}\PYG{p}{,} \PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{))}
+        \PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{=} \PYG{n}{countings}\PYG{p}{[}\PYG{n}{entry}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+
+    \PYG{k}{return} \PYG{n}{res}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{arr} \PYG{o}{=} \PYG{n}{arr} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{9}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{k}{print}\PYG{p}{(}\PYG{n}{counting\PYGZus{}sort}\PYG{p}{(}\PYG{n}{arr}\PYG{p}{,} \PYG{l+m+mi}{9}\PYG{p}{))}
+\end{Verbatim}

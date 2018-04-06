@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\graphicspath{ {img/} }
+\usepackage{titlesec}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%basic page layout
+
+%draw finite state machine
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\newcommand{\hwnumber}{6}
+\newcommand{\Lcvy}{\mathcal{L}}
+%header and footer settings
+\lhead{Algorithms and Data Structure \hwnumber}
+\chead{Yiping Deng}
+\rhead{\today}
+
+\titlelabel{\thetitle\enspace}
+
+\begin{document}
+\title{Algorithms and Data Structure \hwnumber}
+\author{Yiping Deng}
+\maketitle
+\thispagestyle{fancy}
+\section*{Problem 1}
+\subsection*{a)}
+We can see the python code here and explain it.
+\inputminted{Python}{counting_sort.py}
+Basically, in counting sort, we will count the appearance of
+each entries in the array, aggregate the counts in a ascending
+order, and then using such information to put every entries
+in the right position.
+We starts by running the script, we have
+\begin{verbatim}
+counting of 9 is incremented
+counting of 1 is incremented
+counting of 6 is incremented
+counting of 7 is incremented
+counting of 6 is incremented
+counting of 2 is incremented
+counting of 1 is incremented
+countings: [0, 2, 1, 0, 0, 0, 2, 1, 0, 1]
+now we aggregate the countings
+countings: [0, 2, 3, 3, 3, 3, 5, 6, 6, 7]
+restore the result
+put 9 at index 6
+put 1 at index 1
+put 6 at index 4
+put 7 at index 5
+put 6 at index 3
+put 2 at index 2
+put 1 at index 0
+[1, 1, 2, 6, 6, 7, 9]
+\end{verbatim}
+\subsection*{b)}
+Similarly, we have a python script that executes the
+bucket sort and print the intermediate steps.
+It first put elements in the array into $n$ equidistance
+buckets, or arrays, and then do insertion sort on every
+buckets.
+\inputminted{Python}{bucket_sort.py}
+Let's run this script and see this algorithm is executed.
+\begin{verbatim}
+number of bucket: 7
+[[], [], [], [], [], [], []]
+build empty buckets
+start to put in buckets
+find bucket for 0.9
+put in bucket 6
+now in buckets we have [[], [], [], [], [], [], [0.9]]
+find bucket for 0.1
+put in bucket 0
+now in buckets we have [[0.1], [], [], [], [], [], [0.9]]
+find bucket for 0.6
+put in bucket 4
+now in buckets we have [[0.1], [], [], [], [0.6], [], [0.9]]
+find bucket for 0.7
+put in bucket 4
+now in buckets we have [[0.1], [], [], [], [0.6, 0.7], [], [0.9]]
+find bucket for 0.6
+put in bucket 4
+now in buckets we have [[0.1], [], [], [], [0.6, 0.7, 0.6], [], [0.9]]
+find bucket for 0.2
+put in bucket 1
+now in buckets we have [[0.1], [0.2], [], [], [0.6, 0.7, 0.6], [], [0.9]]
+find bucket for 0.1
+put in bucket 0
+now in buckets we have [[0.1, 0.1], [0.2], [], [], [0.6, 0.7, 0.6], [], [0.9]]
+calling the insertion sort on [0.1, 0.1]
+building results by adding [0.1, 0.1]
+calling the insertion sort on [0.2]
+building results by adding [0.2]
+calling the insertion sort on []
+building results by adding []
+calling the insertion sort on []
+building results by adding []
+calling the insertion sort on [0.6, 0.7, 0.6]
+building results by adding [0.6, 0.6, 0.7]
+calling the insertion sort on []
+building results by adding []
+calling the insertion sort on [0.9]
+building results by adding [0.9]
+[0.1, 0.1, 0.2, 0.6, 0.6, 0.7, 0.9]
+\end{verbatim}
+\subsection*{c)}
+We basically implement the first half of bucket sort. We build $k$ buckets and
+put them in accordingly. Without aggregating, to calculate the number of integer in
+inteval $[a, b]$, we just add up numbers from bucket $a$ to bucket $b$, and it will give
+you the result.
+\subsection*{d)}
+the concrete implementation is here
+\inputminted{Python}{word_sort.py}
+\subsection*{e)}
+Let's implement a variant of bubblesort
+\begin{algorithm}
+    \caption{Distance}
+    \label{Distance}
+    \begin{algorithmic}[1]
+        \Procedure{Distance}{$p$}
+        \Comment{Input a point $p$}
+        \State $d_{p} \gets \sqrt{p_1^2 + p_2^2}$ \\
+        \Return $d_{p}$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+\begin{algorithm}
+    \caption{GreaterThan}
+    \label{GreaterThan}
+    \begin{algorithmic}[1]
+        \Procedure{TessThan}{$p, q$}
+        \Comment{Compare two points $p, q$}
+        \State $cmp \gets Distance(p) > Distance(q)$ \\
+        \Return $cmp$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Bubble Sort}
+    \label{bubblesort}
+    \begin{algorithmic}[1]
+        \Procedure{BubbleSort}{$A$}
+        \Comment{Input a array $A$}
+        \State $swapped \gets true$
+        \Comment{Make sure it will execute at least once}
+        \While {swapped}
+        \Comment{Keep executing until it is sorted}
+        \State $swapped \gets false$
+        \For {$i$ from 1 to A.size - 1}
+        \If{$GreaterThan(A[i], A[i + 1])$}
+        \State $swapped \gets true$
+        \State $swap(A[i], A[i + 1])$
+        \Comment{Swap two misplaced elements in the array}
+        \EndIf
+        \EndFor
+        \EndWhile
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+\section*{Problem 2}
+\subsection*{a)}
+This is the variant of radix sort here.
+\inputminted{Python}{radix_sort.py}
+\subsection*{b)}
+Time complexity is straight forward. Assuming a uniform
+distribution on the input, every step will divide the input
+into $base$ cases, and every depth you have $n$ elements to put in and out
+of buckets in total, with
+a tree depth of number of digits, denoted as $k$. Thus, the
+time complexity is $O(k * n) = O(n)$ \\
+Space complexity will be also $O(k * n) = O(n)$. Every recursive call
+you will put $n$ elements in and out of the buckets, thus
+it will have a space complexity of $O(k * n) = O(n)$
+\subsection*{c)}
+You simply take $base = n$ as basis for Radix sort. Thus, it will 
+be at most $3$ as the depth of recursive call(at most 3 digit), and every
+recursive call will take $n$ running time, leading to total
+$O(3n) = O(n)$
+\end{document}

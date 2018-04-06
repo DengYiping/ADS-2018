@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{import} \PYG{n+nn}{org.scalatest.FlatSpec}
+
+\PYG{k}{class} \PYG{n+nc}{QuickSortTest} \PYG{k}{extends} \PYG{n+nc}{FlatSpec} \PYG{o}{\PYGZob{}}
+  \PYG{l+s}{\PYGZdq{}A Partition algorithm\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}divide the array properly in all case\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{arr} \PYG{k}{=} \PYG{n+nc}{Array}\PYG{o}{(}\PYG{l+m+mi}{2}\PYG{o}{,} \PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{k}{val} \PYG{o}{(}\PYG{n}{t1}\PYG{o}{,} \PYG{n}{t2}\PYG{o}{)} \PYG{k}{=} \PYG{n+nc}{QuickSortVariant}\PYG{o}{.}\PYG{n}{partition}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{t1}\PYG{o}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{t2}\PYG{o}{))}
+
+    \PYG{k}{val} \PYG{n}{arr1} \PYG{k}{=} \PYG{n+nc}{Array}\PYG{o}{(}\PYG{l+m+mi}{2}\PYG{o}{,}\PYG{l+m+mi}{1}\PYG{o}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{,} \PYG{l+m+mi}{3}\PYG{o}{,} \PYG{l+m+mi}{4}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{)}
+    \PYG{k}{val} \PYG{o}{(}\PYG{n}{t3}\PYG{o}{,} \PYG{n}{t4}\PYG{o}{)} \PYG{k}{=} \PYG{n+nc}{QuickSortVariant}\PYG{o}{.}\PYG{n}{partition}\PYG{o}{(}\PYG{n}{arr1}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{arr1}\PYG{o}{.}\PYG{n}{length} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{arr1}\PYG{o}{.}\PYG{n}{mkString}\PYG{o}{(}\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{o}{))}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{t3}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{t4}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{t3} \PYG{o}{==} \PYG{l+m+mi}{2}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{t4} \PYG{o}{==} \PYG{l+m+mi}{3}\PYG{o}{)}
+
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{50}\PYG{o}{).}\PYG{n}{map}\PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{(}\PYG{l+m+mi}{100}\PYG{o}{)\PYGZcb{}.}\PYG{n}{toArray}
+    \PYG{k}{val} \PYG{o}{(}\PYG{n}{p1}\PYG{o}{,} \PYG{n}{p2}\PYG{o}{)} \PYG{k}{=} \PYG{n+nc}{QuickSortVariant}\PYG{o}{.}\PYG{n}{partition}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{length} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+
+    \PYG{k}{val} \PYG{n}{sub\PYGZus{}arr1} \PYG{k}{=} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{slice}\PYG{o}{(}\PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{p1}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{sub\PYGZus{}arr1}\PYG{o}{.}\PYG{n}{mkString}\PYG{o}{(}\PYG{l+s}{\PYGZdq{} \PYGZdq{}}\PYG{o}{))}
+    \PYG{k}{val} \PYG{n}{sub\PYGZus{}arr2} \PYG{k}{=} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{slice}\PYG{o}{(}\PYG{n}{p1}\PYG{o}{,} \PYG{n}{p2}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{sub\PYGZus{}arr2}\PYG{o}{.}\PYG{n}{mkString}\PYG{o}{(}\PYG{l+s}{\PYGZdq{} \PYGZdq{}}\PYG{o}{))}
+    \PYG{k}{val} \PYG{n}{sub\PYGZus{}arr3} \PYG{k}{=} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{slice}\PYG{o}{(}\PYG{n}{p2}\PYG{o}{,} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{length}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{sub\PYGZus{}arr3}\PYG{o}{.}\PYG{n}{mkString}\PYG{o}{(}\PYG{l+s}{\PYGZdq{} \PYGZdq{}}\PYG{o}{))}
+
+  \PYG{o}{\PYGZcb{}}
+  \PYG{l+s}{\PYGZdq{}A sorting algorithm\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}sort everything in place\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{arr} \PYG{k}{=} \PYG{o}{(}\PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{50}\PYG{o}{)} \PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{(}\PYG{l+m+mi}{100}\PYG{o}{)\PYGZcb{}} \PYG{n}{toArray}
+    \PYG{k}{val} \PYG{n}{arr1} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{clone}\PYG{o}{().}\PYG{n}{sorted} \PYG{c+c1}{//make a copy of the array and sort}
+    \PYG{k}{val} \PYG{n}{arr2} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{clone}\PYG{o}{()}
+
+    \PYG{n+nc}{QuickSortVariant}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{)}
+
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{arr1}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+
+    \PYG{n+nc}{QuickSortVariantRandom}\PYG{o}{(}\PYG{n}{arr2}\PYG{o}{)}
+
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{arr2}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{arr1}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

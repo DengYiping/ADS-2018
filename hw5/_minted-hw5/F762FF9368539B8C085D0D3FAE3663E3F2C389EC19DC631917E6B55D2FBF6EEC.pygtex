@@ -1,0 +1,104 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{object} \PYG{n+nc}{QuickSortVariant} \PYG{o}{\PYGZob{}}
+  \PYG{k}{def} \PYG{n}{swap}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{i1}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{i2}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)}\PYG{k}{:}\PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{tmp} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i1}\PYG{o}{)}
+    \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i1}\PYG{o}{)} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i2}\PYG{o}{)}
+    \PYG{n}{arr}\PYG{o}{(}\PYG{n}{i2}\PYG{o}{)} \PYG{k}{=} \PYG{n}{tmp}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{partition}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{first}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{last}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:}\PYG{o}{(}\PYG{k+kt}{Int}\PYG{o}{,} \PYG{k+kt}{Int}\PYG{o}{)} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//make a three way partition}
+    \PYG{c+c1}{//return the index of first and second pivot}
+    \PYG{c+c1}{//just don\PYGZsq{}t do stupid thing with this three way partition}
+
+    \PYG{k}{if} \PYG{o}{((}\PYG{n}{last} \PYG{o}{\PYGZhy{}} \PYG{n}{first}\PYG{o}{)} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{3}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+      \PYG{c+c1}{//choose first two as pivot}
+      \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{first}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)))} \PYG{o}{\PYGZob{}}
+        \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)}
+      \PYG{o}{\PYGZcb{}}
+      \PYG{c+c1}{//put it at front and back}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+
+      \PYG{k}{val} \PYG{n}{p} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{first}\PYG{o}{)}
+      \PYG{k}{val} \PYG{n}{q} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{last}\PYG{o}{)}
+
+      \PYG{k}{var} \PYG{n}{l} \PYG{k}{=} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}
+      \PYG{k}{var} \PYG{n}{g} \PYG{k}{=} \PYG{n}{last} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+      \PYG{k}{var} \PYG{n}{k} \PYG{k}{=} \PYG{n}{l}
+
+      \PYG{c+c1}{//maintain the loop invariant}
+      \PYG{k}{while} \PYG{o}{(}\PYG{n}{k} \PYG{o}{\PYGZlt{}=} \PYG{n}{g}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+        \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{lt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{k}\PYG{o}{),} \PYG{n}{p}\PYG{o}{))} \PYG{o}{\PYGZob{}}
+          \PYG{c+c1}{//move the lower up, add one}
+          \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{k}\PYG{o}{,} \PYG{n}{l}\PYG{o}{)}
+          \PYG{n}{l} \PYG{k}{=} \PYG{n}{l} \PYG{o}{+} \PYG{l+m+mi}{1}
+        \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gteq}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{k}\PYG{o}{),} \PYG{n}{q}\PYG{o}{))} \PYG{o}{\PYGZob{}}
+          \PYG{c+c1}{//move the bound for last partition in the right position}
+          \PYG{k}{while} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{g}\PYG{o}{),} \PYG{n}{q}\PYG{o}{)} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{k} \PYG{o}{\PYGZlt{}} \PYG{n}{g}\PYG{o}{)}
+            \PYG{n}{g} \PYG{k}{=} \PYG{n}{g} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+
+          \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{k}\PYG{o}{,} \PYG{n}{g}\PYG{o}{)} \PYG{c+c1}{//add one more}
+          \PYG{n}{g} \PYG{k}{=} \PYG{n}{g} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+
+          \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{lt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{k}\PYG{o}{),} \PYG{n}{p}\PYG{o}{))} \PYG{o}{\PYGZob{}}
+            \PYG{c+c1}{//if the new swapped can be move to even lower categories}
+            \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{k}\PYG{o}{,} \PYG{n}{l}\PYG{o}{)}
+            \PYG{n}{l} \PYG{k}{=} \PYG{n}{l} \PYG{o}{+} \PYG{l+m+mi}{1}
+          \PYG{o}{\PYGZcb{}}
+        \PYG{o}{\PYGZcb{}}
+        \PYG{n}{k} \PYG{k}{=} \PYG{n}{k} \PYG{o}{+} \PYG{l+m+mi}{1} \PYG{c+c1}{//move the index}
+      \PYG{o}{\PYGZcb{}}
+      \PYG{c+c1}{//fix the index}
+      \PYG{n}{l} \PYG{k}{=} \PYG{n}{l} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+      \PYG{n}{g} \PYG{k}{=} \PYG{n}{g} \PYG{o}{+} \PYG{l+m+mi}{1}
+
+      \PYG{c+c1}{//move the pivot in place}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{l}\PYG{o}{)}
+      \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{last}\PYG{o}{,} \PYG{n}{g}\PYG{o}{)}
+
+      \PYG{c+c1}{//return the pivot}
+      \PYG{o}{(}\PYG{n}{l}\PYG{o}{,} \PYG{n}{g}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{first} \PYG{o}{==} \PYG{n}{last} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+      \PYG{c+c1}{//two element partition}
+      \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{first}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{last}\PYG{o}{)))}
+        \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+      \PYG{o}{(}\PYG{n}{first}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{first} \PYG{o}{==} \PYG{n}{last} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+      \PYG{c+c1}{//three element partition}
+      \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{first}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)))}
+        \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)}
+      \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{last}\PYG{o}{)))}
+        \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+      \PYG{k}{if} \PYG{o}{(}\PYG{n}{ord}\PYG{o}{.}\PYG{n}{gt}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{(}\PYG{n}{first}\PYG{o}{),} \PYG{n}{arr}\PYG{o}{(}\PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)))}
+        \PYG{n}{swap}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{first} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)}
+      \PYG{o}{(}\PYG{n}{first}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{k}{if}\PYG{o}{(}\PYG{n}{first} \PYG{o}{==} \PYG{n}{last}\PYG{o}{)\PYGZob{}}
+      \PYG{o}{(}\PYG{n}{first}\PYG{o}{,} \PYG{n}{first}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{o}{\PYGZob{}}
+      \PYG{c+c1}{//should never happen}
+      \PYG{k}{throw} \PYG{k}{new} \PYG{n+nc}{Exception}
+    \PYG{o}{\PYGZcb{}}
+  \PYG{o}{\PYGZcb{}}
+
+
+
+  \PYG{k}{def} \PYG{n}{helper}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{],} \PYG{n}{first}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{,} \PYG{n}{last}\PYG{k}{:} \PYG{k+kt}{Int}\PYG{o}{)(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:}\PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{//sorting from the first to the last, including the last}
+
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{first} \PYG{o}{\PYGZlt{}} \PYG{n}{last}\PYG{o}{)\PYGZob{}}
+      \PYG{k}{val} \PYG{o}{(}\PYG{n}{p1}\PYG{o}{,} \PYG{n}{p2}\PYG{o}{)} \PYG{k}{=} \PYG{n}{partition}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+      \PYG{n}{helper}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{first}\PYG{o}{,} \PYG{n}{p1} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+      \PYG{n}{helper}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{p1} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{,} \PYG{n}{p2} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+      \PYG{n}{helper}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{n}{p2} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{,} \PYG{n}{last}\PYG{o}{)}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{c+c1}{//put this two pivot in the right order}
+  \PYG{o}{\PYGZcb{}}
+
+  \PYG{k}{def} \PYG{n}{apply}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{](}\PYG{n}{arr}\PYG{k}{:} \PYG{k+kt}{Array}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])(}\PYG{k}{implicit} \PYG{n}{ord}\PYG{k}{:} \PYG{k+kt}{Ordering}\PYG{o}{[}\PYG{k+kt}{T}\PYG{o}{])}\PYG{k}{:}\PYG{k+kt}{Unit} \PYG{o}{=} \PYG{o}{\PYGZob{}}
+    \PYG{c+c1}{// the main algorithm}
+    \PYG{c+c1}{// just call the helper function}
+    \PYG{n}{helper}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{length} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

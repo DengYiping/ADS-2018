@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{import} \PYG{n+nn}{org.scalatest.FlatSpec}
+
+\PYG{k}{class} \PYG{n+nc}{HeapSortTest} \PYG{k}{extends} \PYG{n+nc}{FlatSpec}\PYG{o}{\PYGZob{}}
+  \PYG{l+s}{\PYGZdq{}A Heap Sort algorithm \PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}sort everything\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{k}{new} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{10000} \PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{()\PYGZcb{}} \PYG{n}{toArray}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr\PYGZus{}cpy} \PYG{k}{=} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{clone}\PYG{o}{()}
+    \PYG{n+nc}{HeapSort}\PYG{o}{.}\PYG{n}{heapSort}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{rand\PYGZus{}arr\PYGZus{}cpy}\PYG{o}{.}\PYG{n}{sorted}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+  \PYG{l+s}{\PYGZdq{}A Heap Sort Variant\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}sort everything\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{r} \PYG{k}{=} \PYG{k}{new} \PYG{n}{scala}\PYG{o}{.}\PYG{n}{util}\PYG{o}{.}\PYG{n+nc}{Random}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr} \PYG{k}{=} \PYG{l+m+mi}{1} \PYG{n}{to} \PYG{l+m+mi}{10} \PYG{n}{map} \PYG{o}{\PYGZob{}} \PYG{k}{\PYGZus{}} \PYG{k}{=\PYGZgt{}} \PYG{n}{r}\PYG{o}{.}\PYG{n}{nextInt}\PYG{o}{(}\PYG{l+m+mi}{100}\PYG{o}{)\PYGZcb{}} \PYG{n}{toArray}
+    \PYG{k}{val} \PYG{n}{rand\PYGZus{}arr\PYGZus{}cpy} \PYG{k}{=} \PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{clone}\PYG{o}{()}
+    \PYG{n+nc}{HeapSortVariant}\PYG{o}{.}\PYG{n}{heapSortVariant}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{)}
+    \PYG{n}{println}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{rand\PYGZus{}arr}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{rand\PYGZus{}arr\PYGZus{}cpy}\PYG{o}{.}\PYG{n}{sorted}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+  \PYG{l+s}{\PYGZdq{}Move to Bottom Method\PYGZdq{}} \PYG{n}{should} \PYG{l+s}{\PYGZdq{}move one element\PYGZdq{}} \PYG{n}{in} \PYG{o}{\PYGZob{}}
+    \PYG{k}{val} \PYG{n}{arr} \PYG{k}{=} \PYG{n+nc}{Array}\PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{,} \PYG{l+m+mi}{2}\PYG{o}{,} \PYG{l+m+mi}{3}\PYG{o}{,} \PYG{l+m+mi}{4}\PYG{o}{)}
+    \PYG{k}{val} \PYG{n}{expected} \PYG{k}{=} \PYG{n+nc}{Array}\PYG{o}{(}\PYG{l+m+mi}{2}\PYG{o}{,} \PYG{l+m+mi}{3}\PYG{o}{,} \PYG{l+m+mi}{4}\PYG{o}{,} \PYG{l+m+mi}{1}\PYG{o}{)}
+    \PYG{k}{val} \PYG{n}{recovered} \PYG{k}{=} \PYG{n}{arr}\PYG{o}{.}\PYG{n}{clone}\PYG{o}{()}
+    \PYG{n+nc}{HeapSortVariant}\PYG{o}{.}\PYG{n}{moveBottom}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{l+m+mi}{4}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{expected}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+    \PYG{n+nc}{HeapSortVariant}\PYG{o}{.}\PYG{n}{recoverBottom}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{,} \PYG{l+m+mi}{4}\PYG{o}{)}
+    \PYG{n}{assert}\PYG{o}{(}\PYG{n}{arr}\PYG{o}{.}\PYG{n}{deep} \PYG{o}{==} \PYG{n}{recovered}\PYG{o}{.}\PYG{n}{deep}\PYG{o}{)}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

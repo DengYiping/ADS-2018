@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{mul}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{x} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{y}
+    \PYG{n}{halved} \PYG{o}{=} \PYG{n}{mul}\PYG{p}{(}\PYG{n}{x} \PYG{o}{//} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)}
+
+    \PYG{n}{res} \PYG{o}{=} \PYG{n}{halved} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+m+mi}{1}
+    \PYG{c+c1}{\PYGZsh{} bit shift 1 to double the value,}
+    \PYG{c+c1}{\PYGZsh{} this operation is linear time in modern CPU}
+
+    \PYG{k}{if} \PYG{n}{x} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{2} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{res} \PYG{o}{=} \PYG{n}{res} \PYG{o}{+} \PYG{n}{y}
+        \PYG{c+c1}{\PYGZsh{} this operation is in linear time}
+    \PYG{k}{return} \PYG{n}{res}
+\end{Verbatim}

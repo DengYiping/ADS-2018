@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{deque}
+\PYG{k+kn}{import} \PYG{n+nn}{math}
+\PYG{k}{def} \PYG{n+nf}{radix}\PYG{p}{(}\PYG{n}{nums}\PYG{p}{,} \PYG{n}{base} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{leftdigit} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{total\PYGZus{}digit} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} make the buckets}
+    \PYG{n}{rightdigit} \PYG{o}{=} \PYG{l+m+mi}{10} \PYG{o}{\PYGZhy{}} \PYG{n}{leftdigit} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+    \PYG{k}{def} \PYG{n+nf}{num\PYGZus{}digits}\PYG{p}{(}\PYG{n}{num}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{math}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{n}{num}\PYG{p}{,} \PYG{n}{base}\PYG{p}{))} \PYG{o}{+} \PYG{l+m+mi}{1}
+
+    \PYG{k}{def} \PYG{n+nf}{cal\PYGZus{}digit}\PYG{p}{(}\PYG{n}{num}\PYG{p}{,} \PYG{n}{digit}\PYG{p}{):}
+        \PYG{k}{return} \PYG{p}{(}\PYG{n}{num} \PYG{o}{//} \PYG{p}{(}\PYG{n}{base} \PYG{o}{**} \PYG{n}{digit}\PYG{p}{))} \PYG{o}{\PYGZpc{}} \PYG{n}{base}
+
+    \PYG{k}{if}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{nums}\PYG{p}{)} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{nums}
+    \PYG{n}{done\PYGZus{}bucket} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{buckets} \PYG{o}{=} \PYG{p}{[[]} \PYG{k}{for} \PYG{n}{\PYGZus{}} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{base}\PYG{p}{)]}
+    \PYG{k}{for} \PYG{n}{num} \PYG{o+ow}{in} \PYG{n}{nums}\PYG{p}{:}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{leftdigit} \PYG{o}{\PYGZgt{}=} \PYG{n}{total\PYGZus{}digit}\PYG{p}{):}
+            \PYG{k}{print}\PYG{p}{(}\PYG{n}{num\PYGZus{}digits}\PYG{p}{(}\PYG{n}{num}\PYG{p}{))}
+            \PYG{n}{done\PYGZus{}bucket}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{num}\PYG{p}{)}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{buckets}\PYG{p}{[}\PYG{n}{cal\PYGZus{}digit}\PYG{p}{(}\PYG{n}{num}\PYG{p}{,} \PYG{n}{rightdigit}\PYG{p}{)]}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{num}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{}divide and conquer}
+    \PYG{n}{buckets} \PYG{o}{=} \PYG{p}{[}\PYG{n}{radix}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{base}\PYG{p}{,} \PYG{n}{leftdigit} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{total\PYGZus{}digit}\PYG{p}{)} \PYG{k}{for} \PYG{n}{b} \PYG{o+ow}{in} \PYG{n}{buckets}\PYG{p}{]}
+    \PYG{c+c1}{\PYGZsh{} extend the list}
+    \PYG{k}{return} \PYG{n}{done\PYGZus{}bucket} \PYG{o}{+} \PYG{p}{[}\PYG{n}{b} \PYG{k}{for} \PYG{n}{blist} \PYG{o+ow}{in} \PYG{n}{buckets} \PYG{k}{for} \PYG{n}{b} \PYG{o+ow}{in} \PYG{n}{blist}\PYG{p}{]}
+\end{Verbatim}
