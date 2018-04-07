@@ -34,4 +34,23 @@
 \thispagestyle{fancy}
 \section*{Problem 1}
 \subsection*{a)}
+The following is the concrete implementation in Python. Python is by-default generic, since it is not statically typed language. \\
+\textbf{Note:} The python code includes a small unit test. You can simply run
+\begin{minted}{bash}
+    $ python -m doctest -v stack.py
+\end{minted}
+\inputminted{Python}{stack.py}
+\subsection*{b)}
+We can implement a queue via two stacks. The first stack store the input, or freshly enqueued elements. The second stack store the output, or the elements
+that is ready is dequeue.
+When we try to dequeue, and if the second stack is empty, dump the first stack into the second one(poping from stack 1 and push into stack 2).
+The implementation in Python is also included here:
+
+\textbf{Note:} The python code includes a small unit test. You can simply run
+\begin{minted}{bash}
+    $ python -m doctest -v queue.py
+\end{minted}
+\inputminted{Python}{queue.py}
+\section*{Problem 2}
+\subsection*{a)}
 \end{document}
