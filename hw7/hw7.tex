@@ -5,6 +5,8 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{minted}
+\usemintedstyle{tango}
+\usepackage{framed}
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -39,18 +41,59 @@ The following is the concrete implementation in Python. Python is by-default gen
 \begin{minted}{bash}
     $ python -m doctest -v stack.py
 \end{minted}
-\inputminted{Python}{stack.py}
+\begin{framed}
+\inputminted{python}{stack.py}
+\end{framed}
 \subsection*{b)}
 We can implement a queue via two stacks. The first stack store the input, or freshly enqueued elements. The second stack store the output, or the elements
 that is ready is dequeue.
 When we try to dequeue, and if the second stack is empty, dump the first stack into the second one(poping from stack 1 and push into stack 2).
-The implementation in Python is also included here:
-
+The implementation in Python is also included here.\\
 \textbf{Note:} The python code includes a small unit test. You can simply run
 \begin{minted}{bash}
     $ python -m doctest -v queue.py
 \end{minted}
-\inputminted{Python}{queue.py}
+\begin{framed}
+\inputminted{python}{queue.py}
+\end{framed}
 \section*{Problem 2}
 \subsection*{a)}
+To reverse a linked list in-place(or in-situ), we have to abandon our regular functional recursive approach.
+Instead, we just have to reverse the direction of the pointer. The following Python code is a example of how
+to reverse a linked list in place. Since we only uses 3 reference, "next", "prev", and "current". The space complexity is
+obviously constant. Also, since there is only one "while" loop iterate through the linked list, and every operation within
+the "while" takes constant time, so the time complexity is linear(proportional to the length of the linked list). Thus, the time
+complexity is $O(n)$.\\
+\textbf{Note:} The python code includes a small unit test. You can simply run
+\begin{minted}{bash}
+    $ python -m doctest -v linkedlist.py
+\end{minted}
+\begin{framed}
+\inputminted{python}{linkedlist.py}
+\end{framed}
+\subsection*{b)}
+Such question is just in-order tranversal of BST. We can write it recursively. Since it will
+tranverse every element in the tree only once, the total running time is $\Theta(n)$\\
+\textbf{Note:} The python code includes a small unit test. You can simply run
+\begin{minted}{bash}
+    $ python -m doctest -v binarytree_to_list.py
+\end{minted}
+\begin{framed}
+    \inputminted{python}{binarytree.py}
+\end{framed}
+\begin{framed}
+    \inputminted{python}{binarytree_to_list.py}
+\end{framed}
+\subsection*{c)}
+We can just build a binary search tree that has no right node. Simply append smaller elements
+in order on the left, and we will have a binary search tree.\\
+The running time of such operation is $\Theta(n)$ since we will iterate through every element only
+once. \\
+\textbf{Note:} The python code includes a small unit test. You can simply run
+\begin{minted}{bash}
+    $ python -m doctest -v list_to_binarytree.py
+\end{minted}
+\begin{framed}
+    \inputminted{python}{list_to_binarytree.py}
+\end{framed}
 \end{document}
