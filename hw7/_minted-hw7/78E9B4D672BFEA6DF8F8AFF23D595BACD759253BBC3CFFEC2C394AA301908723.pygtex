@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{stack} \PYG{k+kn}{import} \PYG{n}{Stack}
+
+\PYG{k}{class} \PYG{n+nc}{Queue}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    A simple Queue using two stack}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q = Queue()}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.enqueue(2)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.enqueue(3)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.enqueue(4)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.dequeue()}
+\PYG{l+s+sd}{    2}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.enqueue(5)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.dequeue()}
+\PYG{l+s+sd}{    3}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.dequeue()}
+\PYG{l+s+sd}{    4}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} q.dequeue()}
+\PYG{l+s+sd}{    5}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} initalize two Stack}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s1} \PYG{o}{=} \PYG{n}{Stack}\PYG{p}{()}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s2} \PYG{o}{=} \PYG{n}{Stack}\PYG{p}{()}
+
+    \PYG{k}{def} \PYG{n+nf}{enqueue}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{data}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} just put it into stack 2}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s1}\PYG{o}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{prepare\PYGZus{}dequeue}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} dump stack 1 into stack 2}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s2}\PYG{o}{.}\PYG{n}{isEmpty}\PYG{p}{():}
+            \PYG{k}{while} \PYG{o+ow}{not} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s1}\PYG{o}{.}\PYG{n}{isEmpty}\PYG{p}{():}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s2}\PYG{o}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s1}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{())}
+
+    \PYG{k}{def} \PYG{n+nf}{dequeue}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{prepare\PYGZus{}dequeue}\PYG{p}{()} \PYG{c+c1}{\PYGZsh{}prepare}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s2}\PYG{o}{.}\PYG{n}{isEmpty}\PYG{p}{():}
+            \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Queue Underflow Exception\PYGZsq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{s2}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{()}
+\end{Verbatim}

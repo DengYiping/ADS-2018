@@ -1,0 +1,69 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{StackNode}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    A basic linked list implementation}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{data} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{,} \PYG{n}{nxt} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{data} \PYG{o}{=} \PYG{n}{data}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{next} \PYG{o}{=} \PYG{n}{nxt}
+
+\PYG{k}{class} \PYG{n+nc}{Stack}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Implementation of Stack According to the code in the assignment}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s = Stack(2)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.isEmpty()}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.push(5)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.isEmpty()}
+\PYG{l+s+sd}{    False}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.current\PYGZus{}size}
+\PYG{l+s+sd}{    1}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.push(4)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.current\PYGZus{}size}
+\PYG{l+s+sd}{    2}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.pop()}
+\PYG{l+s+sd}{    4}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.pop()}
+\PYG{l+s+sd}{    5}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} s.isEmpty()}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{size} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} there is no recursive call so constant time}
+        \PYG{k}{if} \PYG{n}{size} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{size} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+        \PYG{k}{elif} \PYG{n}{size} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{:}
+            \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Invalid size\PYGZsq{}}\PYG{p}{)}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{size} \PYG{o}{=} \PYG{n}{size}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o}{=} \PYG{n+nb+bp}{None}
+
+    \PYG{k}{def} \PYG{n+nf}{push}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{data}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} constant time`}
+        \PYG{c+c1}{\PYGZsh{} check the size}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{size} \PYG{o}{!=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{o+ow}{and} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{==} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{size}\PYG{p}{:}
+            \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Stack Overflow Exception\PYGZsq{}}\PYG{p}{)}
+
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o}{=} \PYG{n}{StackNode}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}create a node}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{=} \PYG{l+m+mi}{1} \PYG{c+c1}{\PYGZsh{}set the proper size}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o}{=} \PYG{n}{StackNode}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}simply append the linked list}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{+} \PYG{l+m+mi}{1} \PYG{c+c1}{\PYGZsh{} increment}
+
+    \PYG{k}{def} \PYG{n+nf}{pop}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} constant time}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{k}{raise} \PYG{n+ne}{Exception}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Stack Underflow Exception\PYGZsq{}}\PYG{p}{)}
+
+        \PYG{n}{val} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top}\PYG{o}{.}\PYG{n}{data}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top}\PYG{o}{.}\PYG{n}{next} \PYG{c+c1}{\PYGZsh{} move to next one}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{current\PYGZus{}size} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+        \PYG{k}{return} \PYG{n}{val}
+
+    \PYG{k}{def} \PYG{n+nf}{isEmpty}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} constant time}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{top} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}
+\end{Verbatim}

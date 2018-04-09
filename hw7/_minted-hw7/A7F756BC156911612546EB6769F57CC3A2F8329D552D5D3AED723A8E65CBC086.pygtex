@@ -1,0 +1,39 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{linkedlist} \PYG{k+kn}{import} \PYG{n}{Node}
+\PYG{k+kn}{from} \PYG{n+nn}{binarytree} \PYG{k+kn}{import} \PYG{n}{TreeNode}
+
+\PYG{k}{def} \PYG{n+nf}{treeToList}\PYG{p}{(}\PYG{n}{root}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    This function will convert a tree into linkedlist}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} tree = TreeNode(5, TreeNode(3, TreeNode(2), TreeNode(4)), TreeNode(9))}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = treeToList(tree)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst.data}
+\PYG{l+s+sd}{    2}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = lst.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst.data}
+\PYG{l+s+sd}{    3}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = lst.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst.data}
+\PYG{l+s+sd}{    4}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = lst.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst.data}
+\PYG{l+s+sd}{    5}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = lst.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst.data}
+\PYG{l+s+sd}{    9}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} basic reversed in\PYGZhy{}order traversal of BST}
+    \PYG{c+c1}{\PYGZsh{} first right node, then current, then left}
+    \PYG{n}{rst} \PYG{o}{=} \PYG{n+nb+bp}{None} \PYG{c+c1}{\PYGZsh{} the result}
+
+    \PYG{k}{def} \PYG{n+nf}{tranverse}\PYG{p}{(}\PYG{n}{node}\PYG{p}{):}
+        \PYG{n}{nonlocal} \PYG{n}{rst} \PYG{c+c1}{\PYGZsh{}capture the variable rst}
+        \PYG{k}{if} \PYG{n}{node} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{k}{return} 
+        \PYG{n}{tranverse}\PYG{p}{(}\PYG{n}{node}\PYG{o}{.}\PYG{n}{right}\PYG{p}{)}
+        \PYG{n}{rst} \PYG{o}{=} \PYG{n}{Node}\PYG{p}{(}\PYG{n}{node}\PYG{o}{.}\PYG{n}{data}\PYG{p}{,} \PYG{n}{rst}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}append the result}
+        \PYG{n}{tranverse}\PYG{p}{(}\PYG{n}{node}\PYG{o}{.}\PYG{n}{left}\PYG{p}{)}
+
+    \PYG{n}{tranverse}\PYG{p}{(}\PYG{n}{root}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{rst}
+\end{Verbatim}

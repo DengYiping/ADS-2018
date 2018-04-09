@@ -1,0 +1,34 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{Node}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} a basic implementation of linked list node in python}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{data} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{,} \PYG{n}{nxt} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{data} \PYG{o}{=} \PYG{n}{data}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{next} \PYG{o}{=} \PYG{n}{nxt}
+
+\PYG{k}{def} \PYG{n+nf}{reverse}\PYG{p}{(}\PYG{n}{head}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    test the reverse function}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} head = Node(1, Node(2, Node(3)))}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv = reverse(head)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv.data}
+\PYG{l+s+sd}{    3}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv = rv.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv.data}
+\PYG{l+s+sd}{    2}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv = rv.next}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv.data}
+\PYG{l+s+sd}{    1}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} rv.next is None}
+\PYG{l+s+sd}{    True}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} just call the helper}
+    \PYG{n}{prev} \PYG{o}{=} \PYG{n+nb+bp}{None}
+    \PYG{n}{current} \PYG{o}{=} \PYG{n}{head}
+    \PYG{n}{nxt} \PYG{o}{=} \PYG{n+nb+bp}{None}
+    \PYG{k}{while} \PYG{n}{current} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None}\PYG{p}{:}
+        \PYG{n}{nxt} \PYG{o}{=} \PYG{n}{current}\PYG{o}{.}\PYG{n}{next}
+        \PYG{n}{current}\PYG{o}{.}\PYG{n}{next} \PYG{o}{=} \PYG{n}{prev}
+        \PYG{n}{prev} \PYG{o}{=} \PYG{n}{current}
+        \PYG{n}{current} \PYG{o}{=} \PYG{n}{nxt}
+    \PYG{k}{return} \PYG{n}{prev}
+\end{Verbatim}

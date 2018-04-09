@@ -28,6 +28,7 @@ class Stack:
     True
     """
     def __init__(self, size = None):
+        # there is no recursive call so constant time
         if size is None:
             self.size = -1
         elif size <= 0:
@@ -39,6 +40,7 @@ class Stack:
         self.top = None
 
     def push(self, data):
+        # constant time`
         # check the size
         if self.size != -1 and self.current_size == self.size:
             raise Exception('Stack Overflow Exception')
@@ -51,6 +53,7 @@ class Stack:
             self.current_size = self.current_size + 1 # increment
 
     def pop(self):
+        # constant time
         if self.top is None:
             raise Exception('Stack Underflow Exception')
 
@@ -60,5 +63,6 @@ class Stack:
         return val
 
     def isEmpty(self):
+        # constant time
         return self.top is None
 

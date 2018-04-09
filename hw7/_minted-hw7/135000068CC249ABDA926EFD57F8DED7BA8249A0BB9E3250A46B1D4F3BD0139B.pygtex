@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{binarytree} \PYG{k+kn}{import} \PYG{n}{TreeNode}
+\PYG{k+kn}{from} \PYG{n+nn}{linkedlist} \PYG{k+kn}{import} \PYG{n}{Node}
+
+\PYG{k}{def} \PYG{n+nf}{listToTree}\PYG{p}{(}\PYG{n}{head}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} We just simply append everything to the left node}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Convert A sorted linkedlist into binary tree}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} lst = Node(1, Node(2, Node(3, Node(4))))}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} tree = listToTree(lst)}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} tmp = []}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} while tree is not None:}
+\PYG{l+s+sd}{    ...     tmp.append(tree.data)}
+\PYG{l+s+sd}{    ...     tree = tree.left}
+\PYG{l+s+sd}{    \PYGZgt{}\PYGZgt{}\PYGZgt{} tmp}
+\PYG{l+s+sd}{    [4, 3, 2, 1]}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{rst} \PYG{o}{=} \PYG{n+nb+bp}{None}
+    \PYG{k}{while} \PYG{n}{head} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None}\PYG{p}{:}
+        \PYG{n}{rst} \PYG{o}{=} \PYG{n}{TreeNode}\PYG{p}{(}\PYG{n}{head}\PYG{o}{.}\PYG{n}{data}\PYG{p}{,} \PYG{n}{rst}\PYG{p}{,} \PYG{n+nb+bp}{None}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} append to the left}
+        \PYG{n}{head} \PYG{o}{=} \PYG{n}{head}\PYG{o}{.}\PYG{n}{next}
+    \PYG{k}{return} \PYG{n}{rst}
+\end{Verbatim}
