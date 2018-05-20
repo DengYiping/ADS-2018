@@ -1,0 +1,49 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{Activity}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{start} \PYG{o}{=} \PYG{n}{start}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{end} \PYG{o}{=} \PYG{n}{end}
+
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}str\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}start:\PYGZob{}\PYGZcb{} end:\PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{start}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{end}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{overlaps}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{other}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} check if two activities overlaps}
+        \PYG{k}{if} \PYG{o+ow}{not} \PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{start} \PYG{o}{\PYGZgt{}=} \PYG{n}{other}\PYG{o}{.}\PYG{n}{end} \PYG{o+ow}{or} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{end} \PYG{o}{\PYGZlt{}=} \PYG{n}{other}\PYG{o}{.}\PYG{n}{start}\PYG{p}{):}
+            \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}overlaps: first \PYGZhy{} \PYGZob{}\PYGZcb{} second \PYGZhy{} \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{other}\PYG{p}{))}
+            \PYG{k}{return} \PYG{n+nb+bp}{True}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{k}{return} \PYG{n+nb+bp}{False}
+
+\PYG{k}{def} \PYG{n+nf}{hasConflict}\PYG{p}{(}\PYG{n}{selected}\PYG{p}{,} \PYG{n}{current}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} check if it has any collision in the list}
+    \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n}{selected}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{s}\PYG{o}{.}\PYG{n}{overlaps}\PYG{p}{(}\PYG{n}{current}\PYG{p}{):}
+            \PYG{k}{return} \PYG{n+nb+bp}{True}
+    \PYG{k}{return} \PYG{n+nb+bp}{False}
+
+\PYG{k}{def} \PYG{n+nf}{selectActivity}\PYG{p}{(}\PYG{n}{activities}\PYG{p}{,} \PYG{n}{selectedList} \PYG{o}{=} \PYG{p}{[]):}
+    \PYG{c+c1}{\PYGZsh{} base case}
+    \PYG{k}{if} \PYG{n}{activities} \PYG{o}{==} \PYG{p}{[]:}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+
+    \PYG{c+c1}{\PYGZsh{} break the list into head, which is called current}
+    \PYG{c+c1}{\PYGZsh{} and tail, which is called remaining}
+    \PYG{n}{current}\PYG{p}{,} \PYG{o}{*}\PYG{n}{remaining} \PYG{o}{=} \PYG{n}{activities}
+
+    \PYG{k}{if} \PYG{n}{hasConflict}\PYG{p}{(}\PYG{n}{selectedList}\PYG{p}{,} \PYG{n}{current}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{selectActivity}\PYG{p}{(}\PYG{n}{remaining}\PYG{p}{,} \PYG{n}{selectedList}\PYG{p}{)}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} either you include the head or not}
+        \PYG{n}{included} \PYG{o}{=} \PYG{l+m+mi}{1} \PYG{o}{+} \PYG{n}{selectActivity}\PYG{p}{(}\PYG{n}{remaining}\PYG{p}{,} \PYG{n}{selectedList} \PYG{o}{+} \PYG{p}{[}\PYG{n}{current}\PYG{p}{])}
+        \PYG{n}{excluded} \PYG{o}{=} \PYG{n}{selectActivity}\PYG{p}{(}\PYG{n}{remaining}\PYG{p}{,} \PYG{n}{selectedList}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} find the biggest one}
+        \PYG{k}{if} \PYG{n}{included} \PYG{o}{\PYGZgt{}} \PYG{n}{excluded}\PYG{p}{:}
+            \PYG{k}{return} \PYG{n}{included}
+        \PYG{k}{return} \PYG{n}{excluded}
+
+\PYG{k}{def} \PYG{n+nf}{includeLastSelection}\PYG{p}{(}\PYG{n}{activities}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} force inclusion of the last activity}
+    \PYG{k}{return} \PYG{l+m+mi}{1} \PYG{o}{+} \PYG{n}{selectActivity}\PYG{p}{(}\PYG{n}{activities}\PYG{p}{[:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{activities}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{:])}
+\end{Verbatim}

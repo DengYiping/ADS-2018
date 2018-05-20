@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\graphicspath{ {img/} }
+\usepackage{titlesec}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%basic page layout
+
+%draw finite state machine
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\newcommand{\hwnumber}{9}
+\newcommand{\Lcvy}{\mathcal{L}}
+%header and footer settings
+\lhead{Algorithms and Data Structure \hwnumber}
+\chead{Yiping Deng}
+\rhead{\today}
+
+\titlelabel{\thetitle\enspace}
+
+\begin{document}
+\title{Algorithms and Data Structure \hwnumber}
+\author{Yiping Deng}
+\maketitle
+\thispagestyle{fancy}
+\section*{Problem 1}
+\subsection*{a)}
+\inputminted{python}{1a.py}
+With the following python program, we execute the double hashing strategy.
+After running the program, we found 0 collision.
+\subsection*{b)}
+This is the code of the implementation
+\inputminted{python}{1b.py}
+\section*{Problem 2}
+\subsection*{a)}
+Consider the case with \\
+\begin{tabular}{|p{10cm}|}
+    \begin{verbatim}
+    ---     ---
+      ----
+        ----- -------
+    \end{verbatim}
+\end{tabular} \\
+Clearly, the first line represents the optimal obtains by the shortest duration.
+It is not a global optimal, since you can actually do 4 activity if you
+don't include the second activity in the first line.
+\subsection*{b)}
+\inputminted{python}{2b.py}
+We have a concrete implementation of such a algorithm.
+We recursively select activities, one-by-one, and find the maximum
+activities you can include.
+\end{document}

@@ -1,0 +1,54 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{Node}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{key} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{,} \PYG{n}{value} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} just a nod3}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{key} \PYG{o}{=} \PYG{n}{key}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{n}{value}
+
+\PYG{k}{class} \PYG{n+nc}{HashTable}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} with initial size of 100}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{maxSize} \PYG{o}{=} \PYG{l+m+mi}{100}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{currentSize} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb+bp}{None}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{maxSize}
+
+    \PYG{k}{def} \PYG{n+nf}{hashCode}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{key}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} use the default hash of python}
+        \PYG{k}{return} \PYG{n}{key}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}hash\PYGZus{}\PYGZus{}}\PYG{p}{()} \PYG{o}{\PYGZpc{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{maxSize}
+
+    \PYG{k}{def} \PYG{n+nf}{insertNode}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{key}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} insert a node into the hashTable}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{hashCode}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)]} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} if no conflict}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{hashCode}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{Node}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} if conflict}
+            \PYG{n}{code} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{hashCode}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}
+            \PYG{k}{while} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None}\PYG{p}{:}
+                \PYG{n}{code} \PYG{o}{=} \PYG{n}{code} \PYG{o}{+} \PYG{l+m+mi}{1}
+                \PYG{k}{if} \PYG{n}{code} \PYG{o}{\PYGZgt{}=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{maxSize}\PYG{p}{:}
+                    \PYG{k}{raise} \PYG{n+ne}{RuntimeError}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}overflow\PYGZdq{}}\PYG{p}{)}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Node}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} increase the size}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{currentSize} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{currentSize} \PYG{o}{+} \PYG{l+m+mi}{1}
+
+    \PYG{k}{def} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{key}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} get the hashcode}
+        \PYG{n}{code} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{hashCode}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} entry no found}
+            \PYG{k}{return} \PYG{n+nb+bp}{None}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} check if the key is right}
+            \PYG{k}{while} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]}\PYG{o}{.}\PYG{n}{key} \PYG{o}{!=} \PYG{n}{key}\PYG{p}{:}
+                \PYG{n}{code} \PYG{o}{=} \PYG{n}{code} \PYG{o}{+} \PYG{l+m+mi}{1}
+
+                \PYG{c+c1}{\PYGZsh{} if no found again}
+                \PYG{k}{if} \PYG{n}{code} \PYG{o}{\PYGZgt{}=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{maxSize} \PYG{o+ow}{or} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}\PYG{p}{:}
+                    \PYG{k}{return} \PYG{n+nb+bp}{None}
+            \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{arr}\PYG{p}{[}\PYG{n}{code}\PYG{p}{]}\PYG{o}{.}\PYG{n}{value}
+
+    \PYG{k}{def} \PYG{n+nf}{isEmpty}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{currentsize} \PYG{o}{==} \PYG{l+m+mi}{0}
+\end{Verbatim}

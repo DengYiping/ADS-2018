@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{h1}\PYG{p}{(}\PYG{n}{k}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} first hash function}
+    \PYG{k}{return} \PYG{n}{k} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{5}
+
+\PYG{k}{def} \PYG{n+nf}{h2}\PYG{p}{(}\PYG{n}{k}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} second hash function}
+    \PYG{k}{return} \PYG{p}{(}\PYG{l+m+mi}{7} \PYG{o}{*} \PYG{n}{k}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{8}
+
+\PYG{k}{def} \PYG{n+nf}{h}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,} \PYG{n}{i}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} the double hashing function with size 5}
+    \PYG{k}{return} \PYG{p}{(}\PYG{n}{h1}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)} \PYG{o}{+} \PYG{n}{h2}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)} \PYG{o}{*} \PYG{n}{i}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{5}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZsq{}}\PYG{p}{:}
+    \PYG{n}{lst} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{lst}\PYG{p}{:}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZob{}\PYGZcb{} with i = 0 hashes to \PYGZob{}\PYGZcb{}\PYGZsq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{h}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)))}
+\end{Verbatim}
