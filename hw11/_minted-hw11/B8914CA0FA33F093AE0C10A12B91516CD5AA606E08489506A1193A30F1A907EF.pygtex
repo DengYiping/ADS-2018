@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{heapq} \PYG{k+kn}{import} \PYG{o}{*}
+
+\PYG{k}{class} \PYG{n+nc}{Node}\PYG{p}{:}
+    \PYG{n}{compare\PYGZus{}by\PYGZus{}y} \PYG{o}{=} \PYG{n+nb+bp}{False}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{index}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}inf\PYGZsq{}}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dy} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}inf\PYGZsq{}}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{index} \PYG{o}{=} \PYG{n}{index}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{visited} \PYG{o}{=} \PYG{n+nb+bp}{False}
+
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}lt\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{other}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{Node}\PYG{o}{.}\PYG{n}{compare\PYGZus{}by\PYGZus{}y}\PYG{p}{:}
+            \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dy} \PYG{o}{\PYGZlt{}} \PYG{n}{other}\PYG{o}{.}\PYG{n}{dy}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{\PYGZlt{}} \PYG{n}{other}\PYG{o}{.}\PYG{n}{dx}
+    \PYG{k}{def} \PYG{n+nf}{maxval}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{\PYGZgt{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dy}\PYG{p}{):}
+            \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dx}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dy}
+
+\PYG{k}{def} \PYG{n+nf}{find\PYGZus{}meetup\PYGZus{}city}\PYG{p}{(}\PYG{n}{adj\PYGZus{}matrix}\PYG{p}{,} \PYG{n}{your\PYGZus{}city}\PYG{p}{,} \PYG{n}{friend\PYGZus{}city}\PYG{p}{):}
+    \PYG{n}{n} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{adj\PYGZus{}matrix}\PYG{p}{)}
+    \PYG{n}{vec} \PYG{o}{=} \PYG{p}{[}\PYG{n}{Node}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)]}
+    \PYG{n}{q} \PYG{o}{=} \PYG{p}{[]}
+
+    \PYG{c+c1}{\PYGZsh{} Dijkstra on x value}
+    \PYG{n}{vec}\PYG{p}{[}\PYG{n}{your\PYGZus{}city}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{heappush}\PYG{p}{(}\PYG{n}{q}\PYG{p}{,} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{your\PYGZus{}city}\PYG{p}{])}
+
+    \PYG{k}{while} \PYG{n}{q}\PYG{p}{:}
+        \PYG{n}{v} \PYG{o}{=} \PYG{n}{heappop}\PYG{p}{(}\PYG{n}{q}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n}{i} \PYG{o}{!=} \PYG{n}{v}\PYG{o}{.}\PYG{n}{index}\PYG{p}{:}
+                \PYG{n}{altdist} \PYG{o}{=} \PYG{n}{v}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{+} \PYG{n}{adj\PYGZus{}matrix}\PYG{p}{[}\PYG{n}{v}\PYG{o}{.}\PYG{n}{index}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}
+                \PYG{k}{if} \PYG{n}{altdist} \PYG{o}{\PYGZlt{}} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dx}\PYG{p}{:}
+                    \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dx} \PYG{o}{=} \PYG{n}{altdist}
+                    \PYG{n}{heappush}\PYG{p}{(}\PYG{n}{q}\PYG{p}{,} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+
+    \PYG{c+c1}{\PYGZsh{} Dijkstra on y value}
+    \PYG{n}{Node}\PYG{o}{.}\PYG{n}{compare\PYGZus{}by\PYGZus{}y} \PYG{o}{=} \PYG{n+nb+bp}{True}
+    \PYG{n}{vec}\PYG{p}{[}\PYG{n}{friend\PYGZus{}city}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dy} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{heappush}\PYG{p}{(}\PYG{n}{q}\PYG{p}{,} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{friend\PYGZus{}city}\PYG{p}{])}
+
+    \PYG{k}{while} \PYG{n}{q}\PYG{p}{:}
+        \PYG{n}{v} \PYG{o}{=} \PYG{n}{heappop}\PYG{p}{(}\PYG{n}{q}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n}{i} \PYG{o}{!=} \PYG{n}{v}\PYG{o}{.}\PYG{n}{index}\PYG{p}{:}
+                \PYG{n}{altdist} \PYG{o}{=} \PYG{n}{v}\PYG{o}{.}\PYG{n}{dy} \PYG{o}{+} \PYG{n}{adj\PYGZus{}matrix}\PYG{p}{[}\PYG{n}{v}\PYG{o}{.}\PYG{n}{index}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}
+                \PYG{k}{if} \PYG{n}{altdist} \PYG{o}{\PYGZlt{}} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dy}\PYG{p}{:}
+                    \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{dy} \PYG{o}{=} \PYG{n}{altdist}
+                    \PYG{n}{heappush}\PYG{p}{(}\PYG{n}{q}\PYG{p}{,} \PYG{n}{vec}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+
+    \PYG{n}{minCity} \PYG{o}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{vec}\PYG{p}{,} \PYG{n}{key} \PYG{o}{=} \PYG{n}{Node}\PYG{o}{.}\PYG{n}{maxval}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{minCity}\PYG{o}{.}\PYG{n}{index}
+\end{Verbatim}

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{picking\PYGZus{}order}\PYG{p}{(}\PYG{n}{adj\PYGZus{}matrix}\PYG{p}{):}
+    \PYG{n}{rst} \PYG{o}{=} \PYG{p}{[]} \PYG{c+c1}{\PYGZsh{}storing the result}
+    
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{adj\PYGZus{}matrix}\PYG{p}{)):}
+        \PYG{n}{pos} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{k}{for} \PYG{n}{w} \PYG{o+ow}{in} \PYG{n}{rst}\PYG{p}{:}
+            \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{adj\PYGZus{}matrix}\PYG{p}{[}\PYG{n}{w}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]:}
+                \PYG{k}{break}
+            \PYG{n}{pos} \PYG{o}{=} \PYG{n}{pos} \PYG{o}{+} \PYG{l+m+mi}{1}
+        \PYG{n}{rst} \PYG{o}{=} \PYG{n}{rst}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{n}{pos}\PYG{p}{]} \PYG{o}{+} \PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{n}{rst}\PYG{p}{[}\PYG{n}{pos}\PYG{p}{:]}
+    \PYG{k}{return} \PYG{n}{rst}
+\end{Verbatim}
